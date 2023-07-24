@@ -9,7 +9,7 @@ def main():
         height, width, _ = frame.shape
         
         # change BGR to HSV color format
-        hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        # hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
         frame = cv2.flip(frame, 1) # flip frames
 
         # get center coordinate (x, y) of window
@@ -18,10 +18,11 @@ def main():
         print(cx, cy)
         
         # pick pixel value
-        pixel_center = hsv_frame(cy, cx)
-        print(f"pixel center - {pixel_center}")
+        # pixel_center = hsv_frame(cy, cx)
+        # print(f"pixel center - {pixel_center}")
+        
         # add square
-        cv2.square(frame, (cx, cy), 5, (255, 0, 0), 3)
+        cv2.rectangle(frame, (cx-5, cy-5), (cx+5, cy+5), (255, 0, 0), 1)
         
         # show video per frame
         cv2.imshow("Frame", frame)
