@@ -18,12 +18,16 @@ def main():
         
         # pick pixel value
         pixel_center = hsv_frame[cy, cx]
-        hue_value = pixel_center[0]
         
-        print(color_decider(hue_value))
+        color = (color_decider(pixel_center))
+        pixel_center_bgr = frame[cy, cx]
+        b, g, r = int(pixel_center_bgr[0]), int(pixel_center_bgr[1]), int(pixel_center_bgr[2])
 
         # add square
         cv2.rectangle(frame, (cx-5, cy-5), (cx+5, cy+5), (255, 0, 0), 1)
+
+        # add text
+        cv2.putText(frame, color, (10, 50), 0, 1, (b, g, r), 2)
         
         # show video per frame
         cv2.imshow("Frame", frame)

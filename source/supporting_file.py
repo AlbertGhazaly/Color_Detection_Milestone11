@@ -5,7 +5,11 @@ import numpy as np
     
 """
 
-def color_decider(hue_value):
+def color_decider(pixel):
+    hue_value = pixel[0]
+    saturation_value = pixel[1]
+    light_value = pixel[2]
+
     color = "undefined"
     if hue_value < 5:
         color = "RED"
