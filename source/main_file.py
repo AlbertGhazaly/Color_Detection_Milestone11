@@ -15,12 +15,13 @@ def main():
         # get center coordinate (x, y) of window
         cx = int(width / 2)
         cy = int(height / 2)
-        print(cx, cy)
         
         # pick pixel value
-        # pixel_center = hsv_frame(cy, cx)
-        # print(f"pixel center - {pixel_center}")
+        pixel_center = hsv_frame[cy, cx]
+        hue_value = pixel_center[0]
         
+        print(color_decider(hue_value))
+
         # add square
         cv2.rectangle(frame, (cx-5, cy-5), (cx+5, cy+5), (255, 0, 0), 1)
         
