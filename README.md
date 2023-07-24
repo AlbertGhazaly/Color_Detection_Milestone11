@@ -11,3 +11,4 @@
 
 https://pysource.com/2021/10/19/simple-color-recognition-with-opencv-and-python/
 https://www.geeksforgeeks.org/multiple-color-detection-in-real-time-using-python-opencv/
+https://www.geeksforgeeks.org/real-time-object-color-detection-using-opencv/
