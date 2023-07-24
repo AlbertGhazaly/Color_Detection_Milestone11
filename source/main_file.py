@@ -9,7 +9,7 @@ def main():
         height, width, _ = frame.shape
         
         # change BGR to HSV color format
-        # hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
         frame = cv2.flip(frame, 1) # flip frames
 
         # get center coordinate (x, y) of window
