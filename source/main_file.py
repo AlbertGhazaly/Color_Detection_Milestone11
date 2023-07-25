@@ -31,13 +31,10 @@ def main():
         
         # show video per frame
         cv2.imshow("Frame", frame)
-
+        
         key = cv2.waitKey(1)
         if key == 27: # press 'esc'
             break
-
-    cap.release()
-    cv2.destroyAllWindows()
     
     
 

@@ -1,9 +1,6 @@
 import cv2
 import numpy as np
-"""
-    untuk import file dan bahan2 atau variabel2 yang akan digunain
-    
-"""
+# color dictionary HSV (upper range, lower range)
 color_dict_HSV = {'black': [[180, 255, 30], [0, 0, 0]],
               'white': [[180, 18, 255], [0, 0, 231]],
               'red1': [[180, 255, 255], [159, 50, 70]],
@@ -14,6 +11,8 @@ color_dict_HSV = {'black': [[180, 255, 30], [0, 0, 0]],
               'purple': [[158, 255, 255], [129, 50, 70]],
               'orange': [[24, 255, 255], [10, 50, 70]],
               'gray': [[180, 18, 230], [0, 0, 40]]}
+
+# To determine the color using HSV
 def color_decider(pixel):
     hue_value = pixel[0]
     saturation_value = pixel[1]

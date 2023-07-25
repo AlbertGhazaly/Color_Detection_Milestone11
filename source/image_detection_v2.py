@@ -113,7 +113,7 @@ while(1):
 	# Program Termination
 	cv2.imshow("Multiple Color Detection in Real-TIme", imageFrame)
 	if cv2.waitKey(10) & 0xFF == ord('q'):
-		cap.release()
+		webcam.release()
 		cv2.destroyAllWindows()
 		break
 
