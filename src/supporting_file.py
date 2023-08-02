@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+
 # color dictionary HSV (upper range, lower range)
 color_dict_HSV = {'black': [[180, 255, 30], [0, 0, 0]],
               'white': [[180, 18, 255], [0, 0, 231]],
@@ -18,6 +19,7 @@ def color_decider(pixel):
     saturation_value = pixel[1]
     light_value = pixel[2]
     color = "undefined"
+
     for colour in color_dict_HSV:
         if ((color_dict_HSV[colour][1][0]<= hue_value and color_dict_HSV[colour][0][0]>= hue_value) and 
             (color_dict_HSV[colour][1][1]<= saturation_value and color_dict_HSV[colour][0][1]>=saturation_value) and
