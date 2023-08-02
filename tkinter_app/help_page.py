@@ -30,8 +30,7 @@ class ResizingCanvas(Canvas):
         self.itemconfig("button_tag", font=("Arial", button_font_size))
 
 def on_back_click(event):
-    # Replace this function with the desired action when the "Back" button is clicked
-    print("Back button clicked!")
+    print("Back button clicked!") # Replace this function with the desired action when the "Back" button is clicked
 
 def main():
     root = Tk()
