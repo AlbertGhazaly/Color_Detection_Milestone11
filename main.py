@@ -6,6 +6,7 @@ from tkinter import ttk
 from tkinter.messagebox import showinfo
 from PIL import Image, ImageTk
 
+
 from color_detection_file.supporting_file import *
 
 class App(tk.Tk):
@@ -16,12 +17,26 @@ class App(tk.Tk):
         self.geometry("720x540")
         # camera
         self.videoLabel = tk.Label(self)
-        self.videoLabel.grid(row=1, column=0, columnspan=3)
+        self.videoLabel.grid(row=1, column=1, columnspan=3,sticky="W")
         self.webcam = cv2.VideoCapture(0)
                 
         # back button
         self.back = ttk.Button(self, text="Back")
         self.back.grid(row=2,column=0)
+        
+        
+        #warna
+        self.frame_warna =tk.Frame(width=140, height=50, bg="White")
+        self.frame_warna.grid(row=0, column=0, padx=50, pady=10)
+        self.colorframe =tk.Frame(self.frame_warna, width=70,height=40,bg="Blue").grid(row=0,column=0,columnspan=1,padx=5,pady=5)
+        
+        tk.Label(self.colorframe,text="Blue").grid(padx=100,row=0,column=0,pady=0,sticky="E")
+        #mode
+        self.mode= tk.Frame(width=140,height=50).grid(row = 0,column= 3,padx=50,pady=10)
+        tk.Label(self.mode,text="Single Color " ).grid(row = 0,column= 3,padx=5,pady=10,sticky="NW")
+        tk.Label(self.mode,text="Detection" ).grid(row = 0,column= 3,padx=5,pady=10,sticky="SW")
+        #switch mode 
+        self.switch = ttk.Button(self, text ="switch mode").grid(row=0,column=3)
         
         # photo button
         self.photo = ttk.Button(self, text="Take Photo")
