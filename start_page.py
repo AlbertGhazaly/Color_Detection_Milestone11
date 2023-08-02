@@ -3,6 +3,8 @@ from about_page import *
 from help_page import *
 from tkinter import *
 
+from main import App
+
 
 # a subclass of Canvas for dealing with resizing of windows
 class ResizingCanvas(Canvas):
@@ -35,8 +37,11 @@ class ResizingCanvas(Canvas):
         self.itemconfig("text_tag", font=("Arial", text_font_size))
         self.itemconfig("button_tag", font=("Arial", button_font_size))
 
-def button(func):
-    func()
+def main_page(*args):
+    # print("hi")
+    # print(args)
+    app = App()
+    app.mainloop()
 
 def main():
     root = Tk()
@@ -59,7 +64,7 @@ def main():
     mycanvas.create_text(360,520, text="Created By ....", fill = "black", font='Aerial 10', tags="text_tag")
     mycanvas.pack()
 
-    #mycanvas.tag_bind("butt_tag", "<Button-1>", button())
+    mycanvas.tag_bind("start_tag", "<Button-1>", main_page)
 
     # tag all of the drawn widgets
     mycanvas.addtag_all("all")

@@ -11,8 +11,7 @@ import pygetwindow as gw
 
 from color_detection_file.supporting_file import *
 
-def rgb_to_hex(r, g, b):
-                return '#{:02x}{:02x}{:02x}'.format(r, g, b)
+
 
 class App(tk.Tk):
     
@@ -137,7 +136,7 @@ class App(tk.Tk):
                 color = (color_decider(pixel_center))
                 #testing
 
-                hex_value = rgb_to_hex(r,g,b)
+                hex_value = self.rgb_to_hex(r,g,b)
 
 
                 if color == "undefined":
@@ -166,5 +165,8 @@ class App(tk.Tk):
             
                 self.after(10, self.updateFrame) # Rerun updateFrame function after 10 miliseconds
 
-app = App()
-app.mainloop()
+    def rgb_to_hex(self, r, g, b):
+        return '#{:02x}{:02x}{:02x}'.format(r, g, b)
+
+# app = App()
+# app.mainloop()
