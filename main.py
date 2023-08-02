@@ -15,15 +15,15 @@ class App(tk.Tk):
         super().__init__()
         
         self.geometry("720x540")
-        # camera
+        
+        # Column 2 - Camera
         self.videoLabel = tk.Label(self)
         self.videoLabel.grid(row=1, column=1, columnspan=3,sticky="W")
         self.webcam = cv2.VideoCapture(0)
                 
-        # back button
+        # Column 3 - Back Button
         self.back = ttk.Button(self, text="Back")
         self.back.grid(row=2,column=0)
-        
         
         #warna
         self.frame_warna =tk.Frame(width=140, height=50, bg="White")
@@ -39,8 +39,14 @@ class App(tk.Tk):
         self.switch = ttk.Button(self, text ="switch mode").grid(row=0,column=3)
         
         # photo button
+
         self.photo = ttk.Button(self, text="Take Photo")
         self.photo.grid(row=2, column=1)
+        
+        # Column 3 - Toggle Camera Button
+        self.toggle = tk.BooleanVar()
+        self.toggleCamera = tk.Checkbutton(self, text="Toggle Camera", variable = self.toggle)
+        self.toggleCamera.grid(row=2, column=2)
         
         # proportional size
         for i in range(3):
