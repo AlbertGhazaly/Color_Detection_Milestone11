@@ -74,7 +74,7 @@ class App(tk.Tk):
         path = filedialog.asksaveasfilename(defaultextension='.png', filetypes=[("PNG files", "*.png"), ("All Files", "*.*")])
         
         if path:
-            screenshot.save('testing-edbert.png')
+            screenshot.save(path)
         
     def toggleCamera(self):
         self.cameraRunning = not self.cameraRunning
