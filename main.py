@@ -10,10 +10,11 @@ from PIL import Image, ImageTk
 from color_detection_file.supporting_file import *
 
 class App(tk.Tk):
-
+    
     def __init__(self):
         super().__init__()
         
+        self.minsize(1100,540)
         self.geometry("720x540")
         
         # Column 2 - Camera
@@ -26,11 +27,8 @@ class App(tk.Tk):
         self.back.grid(row=2,column=0)
         
         #warna
-        self.frame_warna =tk.Frame(width=140, height=50, bg="White")
-        self.frame_warna.grid(row=0, column=0, padx=50, pady=10)
-        self.colorframe =tk.Frame(self.frame_warna, width=70,height=40,bg="Blue").grid(row=0,column=0,columnspan=1,padx=5,pady=5)
         
-        tk.Label(self.colorframe,text="Blue").grid(padx=100,row=0,column=0,pady=0,sticky="E")
+        
         #mode
         self.mode= tk.Frame(width=140,height=50).grid(row = 0,column= 3,padx=50,pady=10)
         tk.Label(self.mode,text="Single Color " ).grid(row = 0,column= 3,padx=5,pady=10,sticky="NW")
@@ -86,9 +84,31 @@ class App(tk.Tk):
             pixel_center = hsv_frame[cy, cx]
             
             color = (color_decider(pixel_center))
+            
             pixel_center_bgr = frame[cy, cx]
             b, g, r = int(pixel_center_bgr[0]), int(pixel_center_bgr[1]), int(pixel_center_bgr[2])
 
+
+
+
+            #testing
+            if color == "undefined":
+                self.color = ""
+            else :
+                self.color = color
+        
+            self.colorframe =tk.Frame( width=70,height=40,bg="Blue").grid(padx=50,pady=10,row=0,column=0)
+            
+            self.namacolor = tk.Frame(width =70 ,height=40).grid(padx=0,pady=10,row=0,column=1,sticky="W")
+            tk.Label(self.namacolor , text=self.color).grid(padx=0,row=0,column=1,pady=0,sticky="W")
+            
+            
+            
+            
+            
+            
+            
+            
             # add square
             cv2.rectangle(frame, (cx-5, cy-5), (cx+5, cy+5), (255, 0, 0), 1)
 
