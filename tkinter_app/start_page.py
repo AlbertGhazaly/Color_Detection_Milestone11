@@ -1,30 +1,37 @@
-import tkinter as tk
-from tkinter import ttk
-from tkinter.messagebox import showinfo
-from tkinter import Canvas
+from tkinter import *
 
-class Start(tk.Tk):
-    def __init__(self):
-        super().__init__()
+# a subclass of Canvas for dealing with resizing of windows
+class ResizingCanvas(Canvas):
+    def __init__(self,parent,**kwargs):
+        Canvas.__init__(self,parent,**kwargs)
+        self.bind("<Configure>", self.on_resize)
+        self.height = self.winfo_reqheight()
+        self.width = self.winfo_reqwidth()
 
-        # tambahin text didalam sini
-        self.canvas = Canvas(width = 1200, height = 900, bg = "white")
-        self.canvas.create_rectangle(0,0,1200,112, fill ='#D9D9D9', outline='#D9D9D9')
-        self.canvas.create_rectangle(200,150,1000,450, fill ='#D9D9D9', outline='#D9D9D9')
-        self.canvas.create_rectangle(0,587,1200, 500, fill ='#D9D9D9', outline='#D9D9D9')
-        self.canvas.create_rectangle(0,700,1200,590, fill ='#D9D9D9', outline='#D9D9D9')
-        self.canvas.pack()
+    def on_resize(self,event):
+        # determine the ratio of old width/height to new width/height
+        wscale = float(event.width)/self.width
+        hscale = float(event.height)/self.height
+        self.width = event.width
+        self.height = event.height
+        # resize the canvas 
+        self.config(width=self.width, height=self.height)
+        # rescale all the objects tagged with the "all" tag
+        self.scale("all",0,0,wscale,hscale)
 
-        self.geometry("1200x900")
-        self.title ("Color Detection App")
-        # tombol
-        self.button = ttk.Button(self, text='Click Me')
-        self.button['command'] = self.button_clicked
-        self.button.pack()
+def main():
+    root = Tk()
+    myframe = Frame(root)
+    myframe.pack(fill=BOTH, expand=YES)
+    mycanvas = ResizingCanvas(myframe,width=720, height=540, bg="white", highlightthickness=0)
+    mycanvas.pack(fill=BOTH, expand=YES)
 
-    # bisa juga bikin fungsi baru.
-    def button_clicked(self):
-        showinfo(title="information", message="hello")
+    # add some widgets to the canvas
+    mycanvas.create_rectangle(0, 100, 1200, 0, fill="#D9D9D9", outline = "#D9D9D9")
 
-app = Start()
-app.mainloop()
+    # tag all of the drawn widgets
+    mycanvas.addtag_all("all")
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
