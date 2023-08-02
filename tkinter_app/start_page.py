@@ -32,7 +32,6 @@ class ResizingCanvas(Canvas):
         self.itemconfig("text_tag", font=("Arial", text_font_size))
         self.itemconfig("button_tag", font=("Arial", button_font_size))
 
-
 def main():
     root = Tk()
     myframe = Frame(root)
