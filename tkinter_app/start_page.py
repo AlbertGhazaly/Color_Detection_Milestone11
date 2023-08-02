@@ -1,3 +1,4 @@
+import tkinter as tk
 from tkinter import *
 
 # a subclass of Canvas for dealing with resizing of windows
@@ -21,11 +22,15 @@ class ResizingCanvas(Canvas):
 
 def main():
     root = Tk()
+    root.geometry('720x540')
     myframe = Frame(root)
     myframe.pack(fill=BOTH, expand=YES)
     mycanvas = ResizingCanvas(myframe,width=720, height=540, bg="white", highlightthickness=0)
     mycanvas.pack(fill=BOTH, expand=YES)
 
+    # Title
+    label = Label(mycanvas, text = "Color Detecting APP", font=('Arial', 40), bg = '#D9D9D9')
+    label.pack(ipadx= 300, ipady = 30, expand=True)
     # header
     mycanvas.create_rectangle(0, 75, 720, 0, fill="#D9D9D9", outline = "#D9D9D9")
     # middle
