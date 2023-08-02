@@ -2,6 +2,11 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter.messagebox import showinfo
 
+def main():
+    app = About()
+    app.mainloop()
+
+
 class About(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -17,5 +22,6 @@ class About(tk.Tk):
     def button_clicked(self):
         showinfo(title="information", message="hello")
 
-app = About()
-app.mainloop()
+
+if __name__ == "__main__":
+    main()
