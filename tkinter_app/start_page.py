@@ -15,28 +15,40 @@ class ResizingCanvas(Canvas):
         hscale = float(event.height)/self.height
         self.width = event.width
         self.height = event.height
+
         # resize the canvas 
         self.config(width=self.width, height=self.height)
+
         # rescale all the objects tagged with the "all" tag
         self.scale("all",0,0,wscale,hscale)
 
+        # Calculate the new font sizes based on the window height
+        title_font_size = int(24 * (event.height / 540))  # 540 is the initial canvas height
+        text_font_size = int(12 * (event.height / 540))  # 540 is the initial canvas height
+        button_font_size = int(16 * (event.height / 540))  # 540 is the initial canvas height
+
+        # Set the new font sizes for the text elements in the canvas
+        self.itemconfig("title_tag", font=("Arial", title_font_size))
+        self.itemconfig("text_tag", font=("Arial", text_font_size))
+        self.itemconfig("button_tag", font=("Arial", button_font_size))
+
+
 def main():
     root = Tk()
-    root.geometry('720x540')
     myframe = Frame(root)
     myframe.pack(fill=BOTH, expand=YES)
     mycanvas = ResizingCanvas(myframe,width=720, height=540, bg="white", highlightthickness=0)
     mycanvas.pack(fill=BOTH, expand=YES)
 
-    # Title
-    label = Label(mycanvas, text = "Color Detecting APP", font=('Arial', 40), bg = '#D9D9D9')
-    label.pack(ipadx= 300, ipady = 30, expand=True)
     # header
     mycanvas.create_rectangle(0, 75, 720, 0, fill="#D9D9D9", outline = "#D9D9D9")
+    mycanvas.create_text(360,30, text="Color Detection APP", fill = "black", font='Aerial 40', tags="title_tag")
     # middle
     mycanvas.create_rectangle(150, 425, 570, 150, fill="#D9D9D9", outline = "#D9D9D9")
     #footer
     mycanvas.create_rectangle(0, 540, 720, 500, fill="#D9D9D9", outline = "#D9D9D9")
+    mycanvas.create_text(360,520, text="Created By ....", fill = "black", font='Aerial 10', tags="text_tag")
+    mycanvas.pack()
 
     # tag all of the drawn widgets
     mycanvas.addtag_all("all")
