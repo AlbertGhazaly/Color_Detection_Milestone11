@@ -10,7 +10,9 @@ class Start(tk.Tk):
         # tambahin text didalam sini
         self.canvas = Canvas(width = 1200, height = 900, bg = "white")
         self.canvas.create_rectangle(0,0,1200,112, fill ='#D9D9D9', outline='#D9D9D9')
-        self.canvas.create_rectangle(0,900,1200,823, fill ='#D9D9D9', outline='#D9D9D9')
+        self.canvas.create_rectangle(200,150,1000,450, fill ='#D9D9D9', outline='#D9D9D9')
+        self.canvas.create_rectangle(0,587,1200, 500, fill ='#D9D9D9', outline='#D9D9D9')
+        self.canvas.create_rectangle(0,700,1200,590, fill ='#D9D9D9', outline='#D9D9D9')
         self.canvas.pack()
 
         self.geometry("1200x900")
