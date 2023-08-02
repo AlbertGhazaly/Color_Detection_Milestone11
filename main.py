@@ -12,24 +12,45 @@ class App(tk.Tk):
 
     def __init__(self):
         super().__init__()
-
+        
+        self.geometry("720x540")
         # camera
         self.videoLabel = tk.Label(self)
-        self.videoLabel.pack()
+        self.videoLabel.grid(row=1, column=0, columnspan=3)
         self.webcam = cv2.VideoCapture(0)
-        self.updateFrame()
+                
+        # back button
+        self.back = ttk.Button(self, text="Back")
+        self.back.grid(row=2,column=0)
         
-        # tombol
-        self.button = ttk.Button(self, text='Click Me')
-        self.button['command'] = self.button_clicked
-        self.button.pack()
-
-    # bisa juga bikin fungsi baru.
-    def button_clicked(self):
-        showinfo(title="information", message="hello")
+        # photo button
+        self.photo = ttk.Button(self, text="Take Photo")
+        self.photo.grid(row=2, column=1)
+        
+        # proportional size
+        for i in range(3):
+            self.rowconfigure(i, weight = 1)
+            self.columnconfigure(i, weight = 1)
+            
+        self.after(1000, self.main)
+            
+    def main(self):
+        self.updateFrame()
+    
+    def get_tk_win_size(self):
+        return self.winfo_width(), self.winfo_height()
     
     def updateFrame(self):
         _, frame = self.webcam.read()
+        
+        tk_width, tk_height = self.get_tk_win_size()
+        aspect_ratio_w = 4
+        aspect_ratio_h = 3
+        
+        pengali = (tk_height / 3) if (tk_width > tk_height) else int(tk_width) / 4
+        
+        frame = cv2.resize(frame, (int(8*pengali*aspect_ratio_w/10), int(pengali*aspect_ratio_h*8/10)))
+        
         if frame is not None:
             height, width, _ = frame.shape
             # change BGR to HSV color format
