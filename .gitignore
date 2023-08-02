@@ -1,2 +1,3 @@
 __pycache__/
 *.pyc
+color_detection_file/__pycache__
