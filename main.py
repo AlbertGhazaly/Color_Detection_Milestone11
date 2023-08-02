@@ -9,6 +9,9 @@ from PIL import Image, ImageTk
 
 from color_detection_file.supporting_file import *
 
+def rgb_to_hex(r, g, b):
+                return '#{:02x}{:02x}{:02x}'.format(r, g, b)
+
 class App(tk.Tk):
     
     def __init__(self):
@@ -88,19 +91,23 @@ class App(tk.Tk):
             pixel_center_bgr = frame[cy, cx]
             b, g, r = int(pixel_center_bgr[0]), int(pixel_center_bgr[1]), int(pixel_center_bgr[2])
 
-
+            
 
 
             #testing
+            
+            hex_value = rgb_to_hex(r,g,b)
+            
+            
             if color == "undefined":
                 self.color = ""
             else :
                 self.color = color
         
-            self.colorframe =tk.Frame( width=70,height=40,bg="Blue").grid(padx=50,pady=10,row=0,column=0)
+            self.colorframe =tk.Frame( width=70,height=40,bg=hex_value).grid(padx=50,pady=10,row=0,column=0)
             
             self.namacolor = tk.Frame(width =70 ,height=40).grid(padx=0,pady=10,row=0,column=1,sticky="W")
-            tk.Label(self.namacolor , text=self.color).grid(padx=0,row=0,column=1,pady=0,sticky="W")
+            tk.Label(self.namacolor , text=self.color,font=(50)).grid(padx=0,row=0,column=1,pady=0,sticky="W")
             
             
             
