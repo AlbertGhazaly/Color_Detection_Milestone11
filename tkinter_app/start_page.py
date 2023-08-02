@@ -26,8 +26,12 @@ def main():
     mycanvas = ResizingCanvas(myframe,width=720, height=540, bg="white", highlightthickness=0)
     mycanvas.pack(fill=BOTH, expand=YES)
 
-    # add some widgets to the canvas
-    mycanvas.create_rectangle(0, 100, 1200, 0, fill="#D9D9D9", outline = "#D9D9D9")
+    # header
+    mycanvas.create_rectangle(0, 75, 720, 0, fill="#D9D9D9", outline = "#D9D9D9")
+    # middle
+    mycanvas.create_rectangle(150, 425, 570, 150, fill="#D9D9D9", outline = "#D9D9D9")
+    #footer
+    mycanvas.create_rectangle(0, 540, 720, 500, fill="#D9D9D9", outline = "#D9D9D9")
 
     # tag all of the drawn widgets
     mycanvas.addtag_all("all")
