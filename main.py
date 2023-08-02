@@ -8,28 +8,44 @@ from PIL import Image, ImageTk, ImageGrab
 from win32gui import FindWindow, GetWindowRect
 import pygetwindow as gw
 
+
 from color_detection_file.supporting_file import *
 
-class App(tk.Tk):
+def rgb_to_hex(r, g, b):
+                return '#{:02x}{:02x}{:02x}'.format(r, g, b)
 
+class App(tk.Tk):
+    
     def __init__(self):
         super().__init__()
         
+        self.minsize(1100,540)
         self.geometry("720x540")
         self.save_frame = ""
         self.title('color')
         
         # Column 2 - Camera
         self.videoLabel = tk.Label(self)
-        self.videoLabel.grid(row=1, column=0, columnspan=3)
+        self.videoLabel.grid(row=1, column=1, columnspan=3,sticky="W")
         self.webcam = cv2.VideoCapture(0)
                 
         # Column 3 - Back Button
         self.back = ttk.Button(self, text="Back")
         self.back.grid(row=2,column=0)
         
-        # Column 3 - Photo Button
-        self.photo = ttk.Button(self, text="Take Photo", command= self.screenshot)
+        #warna
+        
+        
+        #mode
+        self.mode= tk.Frame(width=140,height=50).grid(row = 0,column= 3,padx=50,pady=10)
+        tk.Label(self.mode,text="Single Color " ).grid(row = 0,column= 3,padx=5,pady=10,sticky="NW")
+        tk.Label(self.mode,text="Detection" ).grid(row = 0,column= 3,padx=5,pady=10,sticky="SW")
+        #switch mode 
+        self.switch = ttk.Button(self, text ="switch mode").grid(row=0,column=3)
+        
+        # photo button
+
+        self.photo = ttk.Button(self, text="Take Photo", command = self.screenshot)
         self.photo.grid(row=2, column=1)
         
         # Column 3 - Toggle Camera Button
@@ -98,7 +114,7 @@ class App(tk.Tk):
             aspect_ratio_h = 3
             
             pengali = (tk_height / 3) if (tk_width > tk_height) else int(tk_width) / 4
-            
+           
             frame = cv2.resize(frame, (int(8*pengali*aspect_ratio_w/10), int(pengali*aspect_ratio_h*8/10)))
             
             if frame is not None:
@@ -118,6 +134,23 @@ class App(tk.Tk):
                 pixel_center_bgr = frame[cy, cx]
                 b, g, r = int(pixel_center_bgr[0]), int(pixel_center_bgr[1]), int(pixel_center_bgr[2])
 
+                color = (color_decider(pixel_center))
+                #testing
+
+                hex_value = rgb_to_hex(r,g,b)
+
+
+                if color == "undefined":
+                    self.color = ""
+                else :
+                    self.color = color
+
+                self.colorframe =tk.Frame( width=70,height=40,bg=hex_value).grid(padx=50,pady=10,row=0,column=0)
+
+                self.namacolor = tk.Frame(width =70 ,height=40).grid(padx=0,pady=10,row=0,column=1,sticky="W")
+                tk.Label(self.namacolor , text=self.color,font=(50)).grid(padx=0,row=0,column=1,pady=0,sticky="W")
+
+            
                 # add square
                 cv2.rectangle(frame, (cx-5, cy-5), (cx+5, cy+5), (255, 0, 0), 1)
 
@@ -131,7 +164,7 @@ class App(tk.Tk):
                 self.videoLabel.config(image=photo)  # Update the videoLabel with the new image
                 self.videoLabel.image = photo  # Keep a reference to the PhotoImage to prevent garbage collection
             
-            self.after(10, self.updateFrame) # Rerun updateFrame function after 10 miliseconds
+                self.after(10, self.updateFrame) # Rerun updateFrame function after 10 miliseconds
 
 app = App()
 app.mainloop()
