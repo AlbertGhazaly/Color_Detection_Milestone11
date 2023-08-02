@@ -1,8 +1,4 @@
-import tkinter as tk
-from about_page import *
-from help_page import *
 from tkinter import *
-
 
 # a subclass of Canvas for dealing with resizing of windows
 class ResizingCanvas(Canvas):
@@ -18,13 +14,11 @@ class ResizingCanvas(Canvas):
         hscale = float(event.height)/self.height
         self.width = event.width
         self.height = event.height
-
         # resize the canvas 
         self.config(width=self.width, height=self.height)
-
         # rescale all the objects tagged with the "all" tag
         self.scale("all",0,0,wscale,hscale)
-
+    
         # Calculate the new font sizes based on the window height
         title_font_size = int(24 * (event.height / 540))  # 540 is the initial canvas height
         text_font_size = int(12 * (event.height / 540))  # 540 is the initial canvas height
@@ -35,9 +29,6 @@ class ResizingCanvas(Canvas):
         self.itemconfig("text_tag", font=("Arial", text_font_size))
         self.itemconfig("button_tag", font=("Arial", button_font_size))
 
-def button(func):
-    func()
-
 def main():
     root = Tk()
     myframe = Frame(root)
@@ -45,22 +36,20 @@ def main():
     mycanvas = ResizingCanvas(myframe,width=720, height=540, bg="white", highlightthickness=0)
     mycanvas.pack(fill=BOTH, expand=YES)
 
-    # header
-    mycanvas.create_rectangle(0, 75, 720, 0, fill="#D9D9D9", outline = "#D9D9D9")
-    mycanvas.create_text(360,30, text="Color Detection APP", fill = "black", font='Aerial 40', tags="title_tag")
-    # middle
-    mycanvas.create_rectangle(150, 425, 570, 150, fill="#D9D9D9", outline = "#D9D9D9")
-    mycanvas.create_text(360,240, text="START", fill = "black", font='Helvetica 40', tags=["title_tag", "start_tag"])
-    mycanvas.create_text(200,390, text="Help", fill = "black", font='Helvetica 20', tags=["help_tag", "button_tag"])
-    mycanvas.create_text(360,390, text="Folder", fill = "black", font='Helvetica 20', tags=["folder_tag", "button_tag"])
-    mycanvas.create_text(520,390, text="Exit", fill = "black", font='Helvetica 20', tags=["exit_tag", "button_tag"])
-    #footer
-    mycanvas.create_rectangle(0, 540, 720, 500, fill="#D9D9D9", outline = "#D9D9D9")
-    mycanvas.create_text(360,520, text="Created By ....", fill = "black", font='Aerial 10', tags="text_tag")
+    # add some widgets to the canvas
+    mycanvas.create_rectangle(0, 0, 720, 67, fill="#D9D9D9", outline="#D9D9D9")
+    mycanvas.create_text(360, 30, text="Help",fill="#000000",font='Arial 24', tags="title_tag")
+    mycanvas.create_rectangle(26, 122, 293, 354, fill="#D9D9D9", outline="#D9D9D9")
+    mycanvas.create_rectangle(428, 122, 694, 354, fill="#D9D9D9", outline="#D9D9D9")
+    mycanvas.create_text(160, 370, text="Arahkan kamera ke benda yang dituju,", fill="#000000",font='Arial 12', tags="text_tag")
+    mycanvas.create_text(160, 390, text="lalu ambil gambar", fill="#000000",font='Arial 12', tags="text_tag")
+    mycanvas.create_text(560, 370, text="tekan tombol “open gallery”, lalu", fill="#000000",font='Arial 12', tags="text_tag")
+    mycanvas.create_text(560, 390, text="pilihlah gambar", fill="#000000",font='Arial 12', tags="text_tag")
+    mycanvas.create_rectangle(26, 440, 131, 480, fill="#D9D9D9", outline="#D9D9D9")
+    mycanvas.create_text(78,460, text="Back", fill="#000000",font='Arial 16', tags="button_tag")
+    mycanvas.create_rectangle(0, 494, 720, 540, fill="#D9D9D9", outline="#D9D9D9")
+    mycanvas.create_text(365,515, text="Created By ....", fill="#000000",font='Arial 16', tags="button_tag")
     mycanvas.pack()
-
-    #mycanvas.tag_bind("butt_tag", "<Button-1>", button())
-
     # tag all of the drawn widgets
     mycanvas.addtag_all("all")
     root.mainloop()
