@@ -57,58 +57,58 @@ class MyApp(tk.Tk):
 
         
 
-class Page2(tk.Frame):
-    def __init__(self, parent):
-        super().__init__(parent)
+# class Page2(tk.Frame):
+#     def __init__(self, parent):
+#         super().__init__(parent)
 
-        label = tk.Label(self, text="Page 2")
-        label.pack(pady=10)
+#         label = tk.Label(self, text="Page 2")
+#         label.pack(pady=10)
 
-        button = ttk.Button(self, text="Go to Page 1", command=lambda: parent.show_page("page1"))
-        button.pack()
+#         button = ttk.Button(self, text="Go to Page 1", command=lambda: parent.show_page("page1"))
+#         button.pack()
 
-        button = ttk.Button(self, text="Go to Page 3", command=lambda: parent.show_page("page3"))
-        button.pack()
+#         button = ttk.Button(self, text="Go to Page 3", command=lambda: parent.show_page("page3"))
+#         button.pack()
 
-class Page3(tk.Frame):
-    def __init__(self, parent):
-        super().__init__(parent)
+# class Page3(tk.Frame):
+#     def __init__(self, parent):
+#         super().__init__(parent)
 
-        label = tk.Label(self, text="Page 3")
-        label.pack(pady=10)
+#         label = tk.Label(self, text="Page 3")
+#         label.pack(pady=10)
 
-        button = ttk.Button(self, text="Go to Page 2", command=lambda: parent.show_page("page2"))
-        button.pack()
+#         button = ttk.Button(self, text="Go to Page 2", command=lambda: parent.show_page("page2"))
+#         button.pack()
 
-class ResizingCanvas(Canvas):
-    def __init__(self,parent,**kwargs):
-        Canvas.__init__(self,parent,**kwargs)
-        self.bind("<Configure>", self.on_resize)
-        self.height = self.winfo_reqheight()
-        self.width = self.winfo_reqwidth()
+# class ResizingCanvas(Canvas):
+#     def __init__(self,parent,**kwargs):
+#         Canvas.__init__(self,parent,**kwargs)
+#         self.bind("<Configure>", self.on_resize)
+#         self.height = self.winfo_reqheight()
+#         self.width = self.winfo_reqwidth()
 
-    def on_resize(self,event):
-        # determine the ratio of old width/height to new width/height
-        wscale = float(event.width)/self.width
-        hscale = float(event.height)/self.height
-        self.width = event.width
-        self.height = event.height
+#     def on_resize(self,event):
+#         # determine the ratio of old width/height to new width/height
+#         wscale = float(event.width)/self.width
+#         hscale = float(event.height)/self.height
+#         self.width = event.width
+#         self.height = event.height
 
-        # resize the canvas 
-        self.config(width=self.width, height=self.height)
+#         # resize the canvas 
+#         self.config(width=self.width, height=self.height)
 
-        # rescale all the objects tagged with the "all" tag
-        self.scale("all",0,0,wscale,hscale)
+#         # rescale all the objects tagged with the "all" tag
+#         self.scale("all",0,0,wscale,hscale)
 
-        # Calculate the new font sizes based on the window height
-        title_font_size = int(24 * (event.height / 540))  # 540 is the initial canvas height
-        text_font_size = int(12 * (event.height / 540))  # 540 is the initial canvas height
-        button_font_size = int(16 * (event.height / 540))  # 540 is the initial canvas height
+#         # Calculate the new font sizes based on the window height
+#         title_font_size = int(24 * (event.height / 540))  # 540 is the initial canvas height
+#         text_font_size = int(12 * (event.height / 540))  # 540 is the initial canvas height
+#         button_font_size = int(16 * (event.height / 540))  # 540 is the initial canvas height
 
-        # Set the new font sizes for the text elements in the canvas
-        self.itemconfig("title_tag", font=("Arial", title_font_size))
-        self.itemconfig("text_tag", font=("Arial", text_font_size))
-        self.itemconfig("button_tag", font=("Arial", button_font_size))
+#         # Set the new font sizes for the text elements in the canvas
+#         self.itemconfig("title_tag", font=("Arial", title_font_size))
+#         self.itemconfig("text_tag", font=("Arial", text_font_size))
+#         self.itemconfig("button_tag", font=("Arial", button_font_size))
 
 if __name__ == "__main__":
     app = MyApp()
