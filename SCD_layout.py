@@ -9,7 +9,7 @@ from PIL import Image, ImageTk
 
 
 
-class frame :
+class SCD():
     def __init__(self) :
       
         self.root = tk.Tk()  # create root window
@@ -33,5 +33,5 @@ class frame :
         tk.Label(self.mode,text="Single Color Detection" ).grid(row = 0,column= 2,padx=5,pady=10)
         
         self.root.mainloop()
-        
-frame()
+
+SCD()

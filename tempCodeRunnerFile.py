@@ -1,1 +1,3 @@
-int(8/10*tk_size[0]), int(8/10*tk_size[1])
+ame):
+#     def __init__(self, parent):
+#         super().__init__(parent)
