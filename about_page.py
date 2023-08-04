@@ -7,6 +7,7 @@ class About(tk.Frame):
     def __init__(self, parent):
         super().__init__(parent)
         # tambahin text didalam sini
+
         self.canvas = Canvas(self, width = 720, height=540, bg="white")
         self.canvas.create_rectangle(0, 0, 720, 112, outline = "light grey", fill="light grey")
         self.canvas.create_rectangle(88, 167, 720, 600, outline = "light grey", fill="light grey")
