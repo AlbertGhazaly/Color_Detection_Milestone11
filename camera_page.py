@@ -11,9 +11,6 @@ import pygetwindow as gw
 
 from color_detection_file.supporting_file import *
 
-def rgb_to_hex(r, g, b):
-    return '#{:02x}{:02x}{:02x}'.format(r, g, b)
-
 class App(tk.Frame):
     
     def __init__(self, parent):
@@ -137,7 +134,7 @@ class App(tk.Frame):
                 color = (color_decider(pixel_center))
                 #testing
 
-                hex_value = rgb_to_hex(r,g,b)
+                hex_value = self.rgb_to_hex(r,g,b)
 
 
                 if color == "undefined":
@@ -165,3 +162,10 @@ class App(tk.Frame):
                 self.videoLabel.image = photo  # Keep a reference to the PhotoImage to prevent garbage collection
             
                 self.after(10, self.updateFrame) # Rerun updateFrame function after 10 miliseconds
+
+    def rgb_to_hex(self, r, g, b):
+        return '#{:02x}{:02x}{:02x}'.format(r, g, b)
+
+# app = App()
+# app.mainloop()
+

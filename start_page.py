@@ -3,6 +3,8 @@ from about_page import *
 from help_page import *
 from tkinter import *
 
+from main import App
+
 
 # a subclass of Canvas for dealing with resizing of windows
 class ResizingCanvas(Canvas):
@@ -58,7 +60,6 @@ class Start(tk.Frame):
         #footer
         mycanvas.create_rectangle(0, 540, 720, 500, fill="#D9D9D9", outline = "#D9D9D9")
         mycanvas.create_text(360,520, text="Created By ....", fill = "black", font='Aerial 10', tags="text_tag")
-        
 
         mycanvas.tag_bind("title_tag", "<Button-1>", self.nextButton)
         mycanvas.tag_bind("help_tag", "<Button-1>", self.helpButton)
