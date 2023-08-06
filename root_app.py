@@ -22,7 +22,7 @@ class App(tk.Tk):
     
     def go_page2(self):
         win = Toplevel()
-        root_app2.App2()
+        # root_app2.MyApp()
         self.withdraw()
         win.deiconify()
 
