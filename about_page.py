@@ -77,6 +77,6 @@ class About(tk.Frame):
         self.canvas.create_text(360,base + 110, text = "memberikan hasil warna dari objek yang terdeteksi. ", fill="black", font=('Helvetica 9'))
         
         self.canvas.create_rectangle(0, 540, 720, 500, fill="#D9D9D9", outline = "#D9D9D9")
-        self.canvas.create_text(360,520, text="Created by MS-11", fill = "black", font='Aerial 10', tags="text_tag")
+        self.canvas.create_text(360,520, text="Created by SPARTANS MS-11", fill = "black", font='Aerial 10', tags="text_tag")
         
         self.canvas.pack()
