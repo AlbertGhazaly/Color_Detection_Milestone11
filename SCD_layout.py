@@ -11,26 +11,26 @@ from PIL import Image, ImageTk
 
 class SCD():
     def __init__(self) :
-      
+        
         self.root = tk.Tk()  # create root window
         self.root.title("SCD layout")
         self.root.config(bg="white")
-        self.root.maxsize(1200, 900)
+        self.root.maxsize(720, 540)
         
         self.main()
 
     def main(self):
         # frame warna
         
-        self.frame_warna =tk.Frame(self.root, width=70, height=70, bg="Blue")
-        self.frame_warna.grid(row=0, column=0, padx=50, pady=10)
+        self.frame_warna =tk.Frame(self.root, width=100, height=70, bg="Blue")
+        self.frame_warna.pack(side=tk.LEFT, anchor="nw",fill=tk.X,ipadx=0,padx=20)
+        
+        self.nama_warna = tk.Frame(self.root,width=50,height=70,bg="White" ).pack(side=tk.LEFT)
+        tk.Label(self.nama_warna, text="Hex",bg="White").pack(anchor="w")
+        tk.Label(self.nama_warna, text="Blue", bg="White").pack(anchor ="w")
 
-        self.nama_warna = tk.Frame(self.root,width=50,height=70,bg="White" ).grid(row=0,column=1,padx=0,pady=0)
-        tk.Label(self.nama_warna, text="Hex",bg="White").grid(row=0,column=1,padx=0,pady=10,sticky="SW")
-        tk.Label(self.nama_warna, text="Blue", bg="White").grid(row=0,column=1,padx=0,pady=10,sticky="NW")
-
-        self.mode= tk.Frame(self.root,width=70,height=70,bg="White").grid(row = 0,column= 2,padx=600,pady=10,sticky="NE")
-        tk.Label(self.mode,text="Single Color Detection" ).grid(row = 0,column= 2,padx=5,pady=10)
+        self.mode= tk.Frame(self.root,width=70,height=70,bg="White").pack( side=tk.RIGHT,anchor="ne")
+        tk.Label(self.mode,text="Single Color Detection",justify="left" ).pack(side=tk.RIGHT,anchor="n")
         
         self.root.mainloop()
 
