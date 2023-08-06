@@ -11,18 +11,15 @@ import pygetwindow as gw
 
 from color_detection_file.supporting_file import *
 
-def rgb_to_hex(r, g, b):
-                return '#{:02x}{:02x}{:02x}'.format(r, g, b)
-
-class App(tk.Tk):
+class App(tk.Frame):
     
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent):
+        super().__init__(parent)
         
-        self.minsize(1100,540)
-        self.geometry("720x540")
+        # self.minsize(1100,540)
+        # self.geometry("720x540")
         self.save_frame = ""
-        self.title('color')
+        # self.title('color')
         
         # Column 2 - Camera
         self.videoLabel = tk.Label(self)
@@ -31,15 +28,15 @@ class App(tk.Tk):
                 
         # Column 3 - Back Button
         self.back = ttk.Button(self, text="Back")
-        self.back.grid(row=2,column=0)
+        self.back# .grid(row=2,column=0)
         
         #warna
         
         
         #mode
-        self.mode= tk.Frame(width=140,height=50).grid(row = 0,column= 3,padx=50,pady=10)
-        tk.Label(self.mode,text="Single Color " ).grid(row = 0,column= 3,padx=5,pady=10,sticky="NW")
-        tk.Label(self.mode,text="Detection" ).grid(row = 0,column= 3,padx=5,pady=10,sticky="SW")
+        self.mode= tk.Frame(width=140,height=50) #.grid(row = 0,column= 3,padx=50,pady=10)
+        tk.Label(self.mode,text="Single Color " ) #.grid(row = 0,column= 3,padx=5,pady=10,sticky="NW")
+        tk.Label(self.mode,text="Detection" ) #.grid(row = 0,column= 3,padx=5,pady=10,sticky="SW")
         #switch mode 
         self.switch = ttk.Button(self, text ="switch mode").grid(row=0,column=3)
         
@@ -137,7 +134,7 @@ class App(tk.Tk):
                 color = (color_decider(pixel_center))
                 #testing
 
-                hex_value = rgb_to_hex(r,g,b)
+                hex_value = self.rgb_to_hex(r,g,b)
 
 
                 if color == "undefined":
@@ -166,5 +163,9 @@ class App(tk.Tk):
             
                 self.after(10, self.updateFrame) # Rerun updateFrame function after 10 miliseconds
 
-app = App()
-app.mainloop()
+    def rgb_to_hex(self, r, g, b):
+        return '#{:02x}{:02x}{:02x}'.format(r, g, b)
+
+# app = App()
+# app.mainloop()
+
