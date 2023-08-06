@@ -64,4 +64,3 @@ class Help(tk.Frame):
     def backButton(self, event):
         print("ho")
         self.show_page_callback("page1")
-

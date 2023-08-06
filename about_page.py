@@ -3,60 +3,40 @@ from tkinter import ttk
 from tkinter.messagebox import showinfo
 from tkinter import *
 
-# a subclass of Canvas for dealing with resizing of windows
-class ResizingCanvas(Canvas):
-    def __init__(self,parent,**kwargs):
-        Canvas.__init__(self,parent,**kwargs)
-        self.bind("<Configure>", self.on_resize)
-        self.height = self.winfo_reqheight()
-        self.width = self.winfo_reqwidth()
-
-    def on_resize(self,event):
-        # determine the ratio of old width/height to new width/height
-        wscale = float(event.width)/self.width
-        hscale = float(event.height)/self.height
-        self.width = event.width
-        self.height = event.height
-        # resize the canvas 
-        self.config(width=self.width, height=self.height)
-        # rescale all the objects tagged with the "all" tag
-        self.scale("all",0,0,wscale,hscale)
-    
-        # Calculate the new font sizes based on the window height
-        title_font_size = int(24 * (event.height / 540))  # 540 is the initial canvas height
-        text_font_size = int(12 * (event.height / 540))  # 540 is the initial canvas height
-        button_font_size = int(16 * (event.height / 540))  # 540 is the initial canvas height
-
-        # Set the new font sizes for the text elements in the canvas
-        self.itemconfig("title_tag", font=("Arial", title_font_size))
-        self.itemconfig("text_tag", font=("Arial", text_font_size))
-        self.itemconfig("button_tag", font=("Arial", button_font_size))
-
 class About(tk.Frame):
-    def __init__(self, parent):
+    def __init__(self, parent, show_page_callback):
         super().__init__(parent)
-        
-        # self.show_page_callback = show_page_callback
-
-        # self.pack(fill=BOTH, expand=YES)
-        # mycanvas = ResizingCanvas(self, width=720, height=540, bg="white", highlightthickness=0)
-        # mycanvas.pack(fill=BOTH, expand=YES)
+        self.show_page_callback = show_page_callback
         
         # Canvas
+        # Create header, content box, and footer
         self.canvas = Canvas(self, width = 720, height=540, bg="white")
         self.canvas.create_rectangle(0, 0, 720, 75, outline = "light grey", fill="light grey")
         self.canvas.create_rectangle(30, 90, 690, 470, outline = "light grey", fill="light grey")
-
-        back = ttk.Button(self, text = "Back", command=lambda: parent.show_page("page1"))
-        back.place(x = 40, y = 30)
-
-        next = ttk.Button(self, text = "Next", command=lambda: parent.show_page("page3"))
-        next.place(x = 134, y = 30)
-
+        
+        # Create header buttons
+        homeButton = self.canvas.create_text(205, 43, text="Return to Home", font = 'Aerial 18', fill = 'black', tags = 'return-home')
+        startAppButton = self.canvas.create_text(500, 43, text="Start App", font = 'Aerial 18', fill = 'black', tags = 'start-app')
+        
+        # Add underline to header buttons
+        bboxHome = self.canvas.bbox(homeButton)
+        bboxStart = self.canvas.bbox(startAppButton)
+        
+        self.canvas.create_rectangle(bboxHome[0], bboxHome[3], bboxHome[2], bboxHome[3] + 2, outline='red', fill = 'red')
+        self.canvas.create_rectangle(bboxStart[0], bboxStart[3], bboxStart[2], bboxStart[3] + 2, outline='blue', fill = 'blue')
+        
+        # Add header button fuctionality
+        rectHome = self.canvas.tag_bind('return-home', '<Button-1>', self.homeButton)
+        rectStart = self.canvas.tag_bind('start-app', '<Button-1>', self.startApp)
         self.main()
-
+        
+    def homeButton(self, event):
+        self.show_page_callback('page1')
+        
+    def startApp(self, event):
+        self.show_page_callback('page3')
+        
     def main(self):
-        # self.canvas.create_rectangle(0, 0, 20, 112, outline = "light grey", fill="red")
        # Main Text
         self.canvas.create_text(360,115, text = "Kenalan yuk!!!", fill="black", font=('Helvetica 15 bold'))
         self.canvas.create_text(360,145, text = "Aplikasi ini dibuat oleh: Milestone 11 SPARTA HMIF 22", fill="black", font=('Helvetica 15'))

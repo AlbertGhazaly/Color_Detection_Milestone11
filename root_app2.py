@@ -21,7 +21,7 @@ class MyApp(tk.Tk):
     def create_pages(self):
         # Create and store instances of your page frames
         self.pages["page1"] = Start(self, self.show_page)
-        self.pages["page2"] = About(self)
+        self.pages["page2"] = About(self, self.show_page)
         self.pages["page3"] = App(self)
         self.pages["page4"] = Help(self, self.show_page)
 
