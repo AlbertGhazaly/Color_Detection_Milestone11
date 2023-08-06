@@ -35,7 +35,8 @@ def main():
         key = cv2.waitKey(1)
         if key == 27: # press 'esc'
             break
-    
+        
+     
     
 
 if __name__ == "__main__":

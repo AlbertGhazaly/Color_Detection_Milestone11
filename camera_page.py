@@ -13,7 +13,7 @@ from color_detection_file.supporting_file import *
 
 class App(tk.Frame):
     
-    def __init__(self, parent):
+    def __init__(self, parent ):
         super().__init__(parent)
         
         # self.minsize(1100,540)
@@ -23,35 +23,34 @@ class App(tk.Frame):
         
         # Column 2 - Camera
         self.videoLabel = tk.Label(self)
-        self.videoLabel.grid(row=1, column=1, columnspan=3,sticky="W")
+        self.videoLabel.pack(side='bottom')
         self.webcam = cv2.VideoCapture(0)
                 
         # Column 3 - Back Button
         self.back = ttk.Button(self, text="Back")
-        self.back# .grid(row=2,column=0)
+        self.back.pack(side='right',anchor='se')
         
         #warna
         
         
         #mode
-        self.mode= tk.Frame(width=140,height=50) #.grid(row = 0,column= 3,padx=50,pady=10)
-        tk.Label(self.mode,text="Single Color " ) #.grid(row = 0,column= 3,padx=5,pady=10,sticky="NW")
-        tk.Label(self.mode,text="Detection" ) #.grid(row = 0,column= 3,padx=5,pady=10,sticky="SW")
+        self.mode= tk.Frame(width=140,height=50).pack() #.grid(row = 0,column= 3,padx=50,pady=10)
+        tk.Label(self.mode,text="Single Color " ).pack() #.grid(row = 0,column= 3,padx=5,pady=10,sticky="NW")
+        tk.Label(self.mode,text="Detection" ).pack() #.grid(row = 0,column= 3,padx=5,pady=10,sticky="SW")
         #switch mode 
-        self.switch = ttk.Button(self, text ="switch mode").grid(row=0,column=3)
+        self.switch = ttk.Button(self, text ="switch mode").pack(side='left',anchor='ne')
         
         # photo button
 
         self.photo = ttk.Button(self, text="Take Photo", command = self.screenshot)
-        self.photo.grid(row=2, column=1)
+        self.photo.pack(side="bottom")
         
         # Column 3 - Toggle Camera Button
         self.toggle = tk.BooleanVar()
         self.toggle.set(True)
         self.cameraRunning = True
         self.toggleCamera = tk.Checkbutton(self, text="Toggle Camera", variable = self.toggle, command=self.toggleCamera)
-        self.toggleCamera.grid(row=2, column=2)
-        
+        self.toggleCamera.pack(side='right',anchor='s')
         # proportional size
         for i in range(3):
             self.rowconfigure(i, weight = 1)
@@ -82,10 +81,10 @@ class App(tk.Frame):
         
     def startCamera(self):
         self.cameraRunning = True
-        self.videoLabel.grid_forget()
+        self.videoLabel.forget_pack()
         
         self.videoLabel = tk.Label(self)
-        self.videoLabel.grid(row=1, column=0, columnspan=3)
+        self.videoLabel.pack()
         self.webcam = cv2.VideoCapture(0)
         
         self.updateFrame()
@@ -94,9 +93,9 @@ class App(tk.Frame):
         self.cameraRunning = False
         self.webcam.release()
         
-        self.videoLabel.grid_forget()
+        self.videoLabel.forget_pack()
         message_label = tk.Label(self, text="Video camera has been turned off.")
-        message_label.grid(row=1, column=0, columnspan=3)
+        message_label.pack()
     
     def get_tk_win_size(self):
         return self.winfo_width(), self.winfo_height()
@@ -142,10 +141,10 @@ class App(tk.Frame):
                 else :
                     self.color = color
 
-                self.colorframe =tk.Frame( width=70,height=40,bg=hex_value).grid(padx=50,pady=10,row=0,column=0)
+                self.colorframe =tk.Frame( width=70,height=40,bg=hex_value).pack()
 
-                self.namacolor = tk.Frame(width =70 ,height=40).grid(padx=0,pady=10,row=0,column=1,sticky="W")
-                tk.Label(self.namacolor , text=self.color,font=(50)).grid(padx=0,row=0,column=1,pady=0,sticky="W")
+                self.namacolor = tk.Frame(width =70 ,height=40).pack()
+                tk.Label(self.namacolor , text=self.color,font=(50)).pack()
 
             
                 # add square
@@ -166,6 +165,5 @@ class App(tk.Frame):
     def rgb_to_hex(self, r, g, b):
         return '#{:02x}{:02x}{:02x}'.format(r, g, b)
 
-# app = App()
-# app.mainloop()
-
+#app = App()
+#app.mainloop()
