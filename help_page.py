@@ -53,7 +53,7 @@ class Help(tk.Frame):
         mycanvas.create_rectangle(26, 440, 131, 480, fill="#D9D9D9", outline="#D9D9D9")
         mycanvas.create_text(78,460, text="Back", fill="#000000",font='Arial 16', tags="button_tag")
         mycanvas.create_rectangle(0, 494, 720, 540, fill="#D9D9D9", outline="#D9D9D9")
-        mycanvas.create_text(365,515, text="Created By ....", fill="#000000",font='Arial 16', tags="button_tag")
+        mycanvas.create_text(365,515, text="Created By ....", fill="#000000",font='Arial 16')
 
         mycanvas.tag_bind("button_tag", "<Button-1>", self.backButton)
 
