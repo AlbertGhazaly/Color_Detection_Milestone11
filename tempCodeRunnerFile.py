@@ -1,1 +1,0 @@
-int(8/10*tk_size[0]), int(8/10*tk_size[1])
