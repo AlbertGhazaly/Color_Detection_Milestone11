@@ -68,6 +68,22 @@ Folder :
 
 ## Lembar Kontribusi
 
+| NIM      |                Nama                |                                                      Kontribusi |
+| -------- | :--------------------------------: | --------------------------------------------------------------: |
+| 19622011 | Muhamad Rifki Virziadeili Harisman | README (Deskripsi Masalah, Deskripsi Solusi, Lembar Kontribusi) |
+| 19622034 |          Abdullah Mubarak          |                                                             ... |
+| 19622066 |          Vanson Kurnialim          |                                                             ... |
+| 19622070 |   Abdullah Erwan Poltak Halomoan   |                                                             ... |
+| 19622071 |       Edbert Eddyson Gunawan       |                                                             ... |
+| 19622091 |        Dinda Thalia Fahira         |                                                             ... |
+| 19622093 |          Micky Valentino           |                                                             ... |
+| 19622194 |         Theo Livius Natael         |                                                             ... |
+| 19622223 |        Louis Ferdyo Gunawan        |                                                             ... |
+| 19622224 |            Kayla Dyara             |                                                             ... |
+| 19622230 |   Muhammad Rasheed Qais Tandjung   |                                                             ... |
+| 19622293 |           Albert Ghazaly           |                                                             ... |
+| 19622311 |           Jimly Nur Arif           |                                                             ... |
+
 ## Reference
 
 https://pysource.com/2021/10/19/simple-color-recognition-with-opencv-and-python/
