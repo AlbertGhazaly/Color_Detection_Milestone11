@@ -32,10 +32,7 @@ class App(tk.Frame):
         self.colorHex = self.canvas.create_text(200, 49, text='#FFFFF', font= 'Aerial 12', anchor='w')
         
         # Select detection mode
-        yMode = 16
-
-        tk.Label(self,text="Single Color").place(x=600, y= yMode)
-        tk.Label(self,text="Detection").place(x=600, y= yMode + 27)
+        self.yMode = 16
         
         # Camera Section
         self.cameraTop = 110
@@ -48,7 +45,7 @@ class App(tk.Frame):
         # Camera Footer
         # width, height = 433, 325
         # camera bottom y = 415
-        select = self.canvas.create_text(528,yMode+7,text='Mode:', font='Aerial 14 bold', tags='select-button')
+        select = self.canvas.create_text(528,self.yMode+7,text='Mode:', font='Aerial 14 bold', tags='select-button')
         back = self.canvas.create_text(190, self.cameraTop + 343, text='Back', font='Aerial 12', tags='back-button')
         screenshot = self.canvas.create_text(335, self.cameraTop + 343, text='Screenshot', font='Aerial 12')
         toggle = self.canvas.create_text(510, self.cameraTop + 343, text='Toggle Camera', font='Aerial 12', tags= 'toggle-camera')
@@ -57,11 +54,12 @@ class App(tk.Frame):
         bboxBack = self.canvas.bbox(back)
         bboxScreenshot = self.canvas.bbox(screenshot)
         bboxToggle = self.canvas.bbox(toggle)
+        bboxMode = self.canvas.bbox(select)
         
         self.canvas.create_rectangle(bboxBack[0], bboxBack[3], bboxBack[2], bboxBack[3] + 1, outline='red', fill = 'red')
         self.canvas.create_rectangle(bboxScreenshot[0], bboxScreenshot[3], bboxScreenshot[2], bboxScreenshot[3] + 1, outline='green', fill = 'green')
         self.canvas.create_rectangle(bboxToggle[0], bboxToggle[3], bboxToggle[2], bboxToggle[3] + 1, outline='blue', fill = 'blue')
-        
+        self.canvas.create_rectangle( bboxMode[0], bboxMode[3], bboxMode[2], bboxMode[3] + 1, outline='black', fill = 'white')
         # select mode
         self.canvas.tag_bind('select-button','<Button-1>',self.change_mode)
         # Go back to help page
@@ -85,7 +83,10 @@ class App(tk.Frame):
         if self.cameraRunning:
             _, frame = self.webcam.read()
             self.save_frame = frame
-            if not self.access_cam:   
+            if not self.access_cam:  
+                #Showing cam mode
+                tk.Label(self,text="Single Color").place(x=600, y= self.yMode)
+                tk.Label(self,text="Detection").place(x=600, y= self.yMode + 27) 
                 tk_width, tk_height = self.get_tk_win_size()
                 aspect_ratio_w = 4
                 aspect_ratio_h = 3
@@ -147,6 +148,9 @@ class App(tk.Frame):
 
                     self.after(10, self.updateFrame)
             else:
+                # showing cam mode
+                tk.Label(self,text="Multi Color").place(x=600, y= self.yMode)
+                tk.Label(self,text="Detection").place(x=600, y= self.yMode + 27) 
                 # Reading the video from the
                 # webcam in image frames
                 # Convert the imageFrame in
@@ -293,8 +297,5 @@ class App(tk.Frame):
     
     def rgb_to_hex(self, r, g, b):
         return '#{:02x}{:02x}{:02x}'.format(r, g, b)
-    
-    def select_mode(self,event):
-        self.show_page_callback('page5')
     def change_mode(self,event):
         self.access_cam = not self.access_cam
