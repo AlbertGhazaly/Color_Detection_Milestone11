@@ -17,7 +17,7 @@ class App(tk.Frame):
     def __init__(self, parent, show_page_callback):
         super().__init__(parent)
         self.show_page_callback = show_page_callback
-        
+        self.access_cam = access_cam
         # Canvas
         self.canvas = Canvas(self, width = 720, height=540, bg="white")
         self.canvas.create_rectangle(0, 0, 720, 75, outline = "light grey", fill="light grey")
@@ -63,7 +63,7 @@ class App(tk.Frame):
         self.canvas.create_rectangle(bboxToggle[0], bboxToggle[3], bboxToggle[2], bboxToggle[3] + 1, outline='blue', fill = 'blue')
         
         # select mode
-        self.canvas.tag_bind('select-button','<Button-1>',self.select_mode)
+        self.canvas.tag_bind('select-button','<Button-1>',self.change_mode)
         # Go back to help page
         self.canvas.tag_bind('back-button', '<Button-1>', self.backButton)
         
@@ -82,11 +82,10 @@ class App(tk.Frame):
         self.updateFrame()
     
     def updateFrame(self):
-        print("real access_cam: ", access_cam)
         if self.cameraRunning:
             _, frame = self.webcam.read()
             self.save_frame = frame
-            if not access_cam:   
+            if not self.access_cam:   
                 tk_width, tk_height = self.get_tk_win_size()
                 aspect_ratio_w = 4
                 aspect_ratio_h = 3
@@ -244,8 +243,6 @@ class App(tk.Frame):
                 self.videoLabel.config(image=photo)  # Update the videoLabel with the new image
                 self.videoLabel.image = photo  #	
                         
-
-                
                 self.after(10, self.updateFrame) # Rerun updateFrame function after 10 miliseconds
 
     def backButton(self, event):
@@ -299,3 +296,5 @@ class App(tk.Frame):
     
     def select_mode(self,event):
         self.show_page_callback('page5')
+    def change_mode(self,event):
+        self.access_cam = not self.access_cam
