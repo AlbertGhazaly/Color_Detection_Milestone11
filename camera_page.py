@@ -33,7 +33,7 @@ class App(tk.Frame):
         
         # Select detection mode
         yMode = 16
-        tk.Label(self, text='Mode:', font='Aerial 14 bold').place(x=528, y= yMode + 7)
+
         tk.Label(self,text="Single Color").place(x=600, y= yMode)
         tk.Label(self,text="Detection").place(x=600, y= yMode + 27)
         
@@ -48,6 +48,7 @@ class App(tk.Frame):
         # Camera Footer
         # width, height = 433, 325
         # camera bottom y = 415
+        select = self.canvas.create_text(528,yMode+7,text='Mode:', font='Aerial 14 bold', tags='select-button')
         back = self.canvas.create_text(190, self.cameraTop + 343, text='Back', font='Aerial 12', tags='back-button')
         screenshot = self.canvas.create_text(335, self.cameraTop + 343, text='Screenshot', font='Aerial 12')
         toggle = self.canvas.create_text(510, self.cameraTop + 343, text='Toggle Camera', font='Aerial 12', tags= 'toggle-camera')
@@ -61,6 +62,8 @@ class App(tk.Frame):
         self.canvas.create_rectangle(bboxScreenshot[0], bboxScreenshot[3], bboxScreenshot[2], bboxScreenshot[3] + 1, outline='green', fill = 'green')
         self.canvas.create_rectangle(bboxToggle[0], bboxToggle[3], bboxToggle[2], bboxToggle[3] + 1, outline='blue', fill = 'blue')
         
+        # select mode
+        self.canvas.tag_bind('select-button','<Button-1>',self.select_mode)
         # Go back to help page
         self.canvas.tag_bind('back-button', '<Button-1>', self.backButton)
         
@@ -192,3 +195,6 @@ class App(tk.Frame):
     
     def rgb_to_hex(self, r, g, b):
         return '#{:02x}{:02x}{:02x}'.format(r, g, b)
+    
+    def select_mode(self,event):
+        self.show_page_callback('page5')

@@ -25,7 +25,7 @@ class MyApp(tk.Tk):
         self.pages["page2"] = About(self, self.show_page)
         self.pages["page3"] = App(self, self.show_page)
         self.pages["page4"] = Help(self, self.show_page)
-        self.pages["page5"] = Select(self,self.show_page)
+        self.pages["page5"] = Select(self, self.show_page)
 
     def show_page(self, page_name):
         # Show the selected page and hide others
