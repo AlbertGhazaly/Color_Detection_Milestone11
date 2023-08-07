@@ -33,6 +33,8 @@ Dengan visualisasi yang ditampilkan diatas, tentunya mereka akan memiliki kesuli
 
 Dengan memanfaatkan perkembangan teknologi yang telah ada sekarang, kami sebagai mahasiswa Teknik Informatika dan Sistem Teknologi Informasi yang memiliki rasa empati terhadap kondisi buta warna yang diderita oleh sebagian orang, memutuskan untuk mendesain Color Detection App for Color Blind People. Color Detection App for Color Blind People adalah sebuah aplikasi yang dirancang khusus untuk membantu orang-orang dengan gangguan penglihatan warna. Aplikasi ini bertujuan untuk membantu pengguna dengan daltonisme dengan mengidentifikasi warna yang ada di sekitar mereka. Dengan menggunakan kamera ponsel atau perangkat lain, aplikasi akan mengenali warna objek dalam pandangan dan menginformasikan pengguna tentang warna tersebut.<br>
 
+jsjsjsj
+
 ## Requirement program dan Instalasi
 
 1. Pengguna harus menginstall Python3 ([Download di sini](https://www.python.org/downloads/))
