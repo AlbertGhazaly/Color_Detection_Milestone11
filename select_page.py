@@ -38,12 +38,19 @@ class Select(tk.Frame):
         
     def main(self):
        # Main Text
-        self.canvas.create_text(360,220, text = "MODE 1", fill="black", font=('Helvetica 15 bold'))
-        self.canvas.create_text(360,270, text = "MODE 2", fill="black", font=('Helvetica 15'))
-       
+        self.canvas.create_text(360,220, text = "MODE 1", fill="black", font=('Helvetica 15 bold'), tags='start-app')
+        self.canvas.create_text(360,270, text = "MODE 2", fill="black", font=('Helvetica 15'), tags='start-app2')
+        #tag bind
+        self.canvas.tag_bind('start-app', '<Button-1>', self.start_app)
+        self.canvas.tag_bind('start-app2', '<Button-1>', self.start_app2)
+
         self.canvas.create_rectangle(0, 540, 720, 500, fill="#D9D9D9", outline = "#D9D9D9")
         self.canvas.create_text(360,520, text="Created by SPARTANS MS-11", fill = "black", font='Aerial 10', tags="text_tag")
-        
         self.canvas.pack()
+
+    def start_app(self,event):
+        self.show_page_callback('page3')
+    def start_app2(self,event):
+        self.show_page_callback('page6')
 
 
