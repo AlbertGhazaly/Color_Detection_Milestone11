@@ -40,11 +40,13 @@ while(1):
 	# to detect only that particular color
 	kernel = np.ones((5, 5), "uint8")
 
-	# For red color
+	#Create mask and implementation for each color in image
+
+	# For black color
 	black_mask = cv2.dilate(black_mask, kernel)
 	res_black = cv2.bitwise_and(imageFrame, imageFrame,
 							mask = black_mask)
-	# For red color
+	# For white color
 	white_mask = cv2.dilate(white_mask, kernel)
 	res_white = cv2.bitwise_and(imageFrame, imageFrame,
 							mask = white_mask)
@@ -52,7 +54,7 @@ while(1):
 	red_mask = cv2.dilate(red_mask, kernel)
 	res_red = cv2.bitwise_and(imageFrame, imageFrame,
 							mask = red_mask)
-	# For red color
+	# For Red color
 	Red_mask = cv2.dilate(Red_mask, kernel)
 	res_Red = cv2.bitwise_and(imageFrame, imageFrame,
 							mask = Red_mask)
@@ -64,11 +66,11 @@ while(1):
 	blue_mask = cv2.dilate(blue_mask, kernel)
 	res_blue = cv2.bitwise_and(imageFrame, imageFrame,
 							mask = blue_mask)
-		# For blue color
+	# For yellow color
 	yellow_mask = cv2.dilate(yellow_mask, kernel)
 	res_yellow = cv2.bitwise_and(imageFrame, imageFrame,
 							mask = yellow_mask)
-	# For blue color
+	# For purple color
 	purple_mask = cv2.dilate(purple_mask, kernel)
 	res_purple = cv2.bitwise_and(imageFrame, imageFrame,
 							mask = purple_mask)
@@ -76,13 +78,16 @@ while(1):
 	orange_mask = cv2.dilate(orange_mask, kernel)
 	res_orange = cv2.bitwise_and(imageFrame, imageFrame,
 							mask = orange_mask)
-	# For blue color
+	# For brown color
 	brown_mask = cv2.dilate(brown_mask, kernel)
 	res_brown = cv2.bitwise_and(imageFrame, imageFrame,
 							mask = brown_mask)
 	
+
+	# list of colors
 	color_mask_list = [black_mask,white_mask,red_mask,Red_mask,green_mask,blue_mask,yellow_mask,
 		    purple_mask,orange_mask,brown_mask]
+
 	for order in range(0,10):
 		# Creating contour to track each color
 		contours, hierarchy = cv2.findContours(color_mask_list[order],
@@ -92,14 +97,15 @@ while(1):
 		for pic, contour in enumerate(contours):
 			area = cv2.contourArea(contour)
 			if(area > 1500): #Size of color detected
-				x, y, w, h = cv2.boundingRect(contour)
+				x, y, w, h = cv2.boundingRect(contour) #the rectangle
 				imageFrame = cv2.rectangle(imageFrame, (x, y),
 			       						(x + w, y + h),
 				  						 tuple(color_dict_BGR[color_list[order]]), 2)
-				
+				#Puting text on rectangle
 				cv2.putText(imageFrame, color_list[order], (x, y),
 							cv2.FONT_HERSHEY_SIMPLEX, 1.0,
 							tuple(color_dict_BGR[color_list[order]]))		
+				
 	# Program Termination
 	cv2.imshow("Multiple Color Detection in Real-TIme", imageFrame)
 	key = cv2.waitKey(1)
