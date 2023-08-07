@@ -84,7 +84,7 @@ Folder :
 | 19622224 |            Kayla Dyara             | Membuat ReadMe deskripsi  masalah dan lembar kontribusi                                                                                               |
 | 19622230 |   Muhammad Rasheed Qais Tandjung   |   Menulis kode camera page dan style tombol aplikasi                                                                                           |
 | 19622293 |           Albert Ghazaly           | Color adding (BGR & HSV) di supporting_file, desain dan bikin multicolor detection, menggabungkan dan mengimplementasikan multicolor detection ke camera_page untuk aplikasi, debugging camera error                                                                                               |
-| 19622311 |           Jimly Nur Arif           |                   README dan laporan bagian emphatize                                                                               |
+| 19622311 |           Jimly Nur Arif           |                   Membuat README                                                                              |
 
 ## Reference
 
