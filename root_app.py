@@ -5,7 +5,6 @@ from camera_page import App
 from start_page import Start
 from about_page import About
 from help_page import Help
-from select_page import Select
 
 
 class MyApp(tk.Tk):
@@ -24,7 +23,6 @@ class MyApp(tk.Tk):
         self.pages["page1"] = Start(self, self.show_page)
         self.pages["page2"] = About(self, self.show_page)
         self.pages["page4"] = Help(self, self.show_page)
-        self.pages["page5"] = Select(self, self.show_page)
         self.pages["page3"] = App(self, self.show_page)
             
 

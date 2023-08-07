@@ -80,7 +80,6 @@ class App(tk.Frame):
         self.updateFrame()
     
     def updateFrame(self):
-        self.access_cam = access_cam
         if self.cameraRunning:
             _, frame = self.webcam.read()
             self.save_frame = frame
