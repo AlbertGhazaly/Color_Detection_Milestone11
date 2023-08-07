@@ -1,18 +1,37 @@
 import cv2
 import numpy as np
-# color dictionary HSV (upper range, lower range)
+"""
+    untuk import file dan bahan2 atau variabel2 yang akan digunain
+    
+"""
+def median(list1,list2):
+    list = []
+    for i in range(len(list1)):
+        list.append((list1[i]+list2[i])/2)
+    return list
+
+color_list = ["black","white","red","Red","green","blue","yellow","purple","orange","gray"]
 color_dict_HSV = {'black': [[180, 255, 30], [0, 0, 0]],
               'white': [[180, 18, 255], [0, 0, 231]],
-              'red1': [[180, 255, 255], [159, 50, 70]],
-              'red2': [[9, 255, 255], [0, 50, 70]],
+              'red': [[180, 255, 255], [159, 50, 70]],
+              'Red': [[9, 255, 255], [0, 50, 70]],
               'green': [[89, 255, 255], [36, 50, 70]],
               'blue': [[128, 255, 255], [90, 50, 70]],
               'yellow': [[35, 255, 255], [25, 50, 70]],
               'purple': [[158, 255, 255], [129, 50, 70]],
               'orange': [[24, 255, 255], [10, 50, 70]],
               'gray': [[180, 18, 230], [0, 0, 40]]}
+color_dict_RGB = {'black': [0,0,0],
+              'white': [255,255,255],
+              'red': [255,0,0],
+              'Red': [255,0,0],
+              'green': [0,255,0],
+              'blue': [0,0,255],
+              'yellow': [255,255,0],
+              'purple': [128,0,128],
+              'orange': [255,69,0],
+              'gray': [192,192,192]}
 
-# To determine the color using HSV
 def color_decider(pixel):
     hue_value = pixel[0]
     saturation_value = pixel[1]
@@ -23,5 +42,5 @@ def color_decider(pixel):
             (color_dict_HSV[colour][1][1]<= saturation_value and color_dict_HSV[colour][0][1]>=saturation_value) and
             (color_dict_HSV[colour][1][2]<= light_value and color_dict_HSV[colour][0][2]>=light_value)):
             color = colour
-            
+
     return color
