@@ -33,6 +33,13 @@ Dengan visualisasi yang ditampilkan diatas, tentunya mereka akan memiliki kesuli
 
 Dengan memanfaatkan perkembangan teknologi yang telah ada sekarang, kami sebagai mahasiswa Teknik Informatika dan Sistem Teknologi Informasi yang memiliki rasa empati terhadap kondisi buta warna yang diderita oleh sebagian orang, memutuskan untuk mendesain Color Detection App for Color Blind People. Color Detection App for Color Blind People adalah sebuah aplikasi yang dirancang khusus untuk membantu orang-orang dengan gangguan penglihatan warna. Aplikasi ini bertujuan untuk membantu pengguna dengan daltonisme dengan mengidentifikasi warna yang ada di sekitar mereka. Dengan menggunakan kamera ponsel atau perangkat lain, aplikasi akan mengenali warna objek dalam pandangan dan menginformasikan pengguna tentang warna tersebut.<br>
 
+## Requirement program dan Instalasi
+
+1. Pengguna harus menginstall Python3 ([Download di sini](https://www.python.org/downloads/))
+2. Setelah memiliki Python3, ada beberapa requirement yang harus diinstal
+   - install opencv
+   - install tkinter
+
 ## How to Use
 
 - Buka aplikasi
@@ -68,21 +75,21 @@ Folder :
 
 ## Lembar Kontribusi
 
-| NIM      |                Nama                |                                                      Kontribusi |
-| -------- | :--------------------------------: | --------------------------------------------------------------: |
-| 19622011 | Muhamad Rifki Virziadeili Harisman | README (Deskripsi Masalah, Deskripsi Solusi, Lembar Kontribusi) |
-| 19622034 |          Abdullah Mubarak          |                                                             ... |
-| 19622066 |          Vanson Kurnialim          |                                                             ... |
-| 19622070 |   Abdullah Erwan Poltak Halomoan   |                                                             ... |
-| 19622071 |       Edbert Eddyson Gunawan       |                                                             ... |
-| 19622091 |        Dinda Thalia Fahira         |                                                             ... |
-| 19622093 |          Micky Valentino           |                                                             ... |
-| 19622194 |         Theo Livius Natael         |                                                             ... |
-| 19622223 |        Louis Ferdyo Gunawan        |                                                             ... |
-| 19622224 |            Kayla Dyara             |                                                             ... |
-| 19622230 |   Muhammad Rasheed Qais Tandjung   |                                                             ... |
-| 19622293 |           Albert Ghazaly           |                                                             ... |
-| 19622311 |           Jimly Nur Arif           |                                                             ... |
+| NIM      |                Nama                |                                                                                         Kontribusi |
+| -------- | :--------------------------------: | -------------------------------------------------------------------------------------------------: |
+| 19622011 | Muhamad Rifki Virziadeili Harisman | README (Deskripsi Masalah, Deskripsi Solusi, Lembar Kontribusi, Requirement program dan Instalasi) |
+| 19622034 |          Abdullah Mubarak          |                                                                                                ... |
+| 19622066 |          Vanson Kurnialim          |                                                                                                ... |
+| 19622070 |   Abdullah Erwan Poltak Halomoan   |                                                                                                ... |
+| 19622071 |       Edbert Eddyson Gunawan       |                                                                                                ... |
+| 19622091 |        Dinda Thalia Fahira         |                                                                                                ... |
+| 19622093 |          Micky Valentino           |                                                                                                ... |
+| 19622194 |         Theo Livius Natael         |                                                                                                ... |
+| 19622223 |        Louis Ferdyo Gunawan        |                                                                                                ... |
+| 19622224 |            Kayla Dyara             |                                                                                                ... |
+| 19622230 |   Muhammad Rasheed Qais Tandjung   |                                                                                                ... |
+| 19622293 |           Albert Ghazaly           |                                                                                                ... |
+| 19622311 |           Jimly Nur Arif           |                                                                                                ... |
 
 ## Reference
 
