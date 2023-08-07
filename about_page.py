@@ -28,6 +28,28 @@ class About(tk.Frame):
         # Add header button fuctionality
         rectHome = self.canvas.tag_bind('return-home', '<Button-1>', self.homeButton)
         rectStart = self.canvas.tag_bind('start-app', '<Button-1>', self.startApp)
+        
+        # Add button hover logic
+        def buttonEnter(event, button):
+            self.canvas.itemconfig(button, fill='#FFA500')
+            
+            self.canvas.config(cursor='cross')
+            self.canvas.update()
+            
+        def buttonLeave(event):
+            self.canvas.itemconfig('return-home', fill='black')
+            self.canvas.itemconfig('start-app', fill='black')
+            
+            self.canvas.config(cursor='')
+            self.canvas.update()
+        
+        self.canvas.tag_bind('return-home', '<Enter>', lambda event: buttonEnter(event, 'return-home'))
+        self.canvas.tag_bind('start-app', '<Enter>', lambda event: buttonEnter(event, 'start-app'))
+        
+        self.canvas.tag_bind('return-home', '<Leave>', buttonLeave)
+        self.canvas.tag_bind('start-app', '<Leave>', buttonLeave)
+        
+        # Main function
         self.main()
         
     def homeButton(self, event):
