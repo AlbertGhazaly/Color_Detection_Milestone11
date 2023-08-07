@@ -48,9 +48,9 @@ class App(tk.Frame):
         # Camera Footer
         # width, height = 433, 325
         # camera bottom y = 415
-        back = self.canvas.create_text(190, self.cameraTop + 343, text='Back', font='Aerial 12', tags='back-button')
-        screenshot = self.canvas.create_text(335, self.cameraTop + 343, text='Screenshot', font='Aerial 12')
-        toggle = self.canvas.create_text(510, self.cameraTop + 343, text='Toggle Camera', font='Aerial 12', tags= 'toggle-camera')
+        back = self.canvas.create_text(190, self.cameraTop + 343, text='Back', font='Aerial 12', tags=['back-button', 'button'])
+        screenshot = self.canvas.create_text(335, self.cameraTop + 343, text='Screenshot', font='Aerial 12', tags=['screenshot-button', 'button'])
+        toggle = self.canvas.create_text(510, self.cameraTop + 343, text='Toggle Camera', font='Aerial 12', tags= ['toggle-camera', 'button'])
         
         # Add underline to buttons
         bboxBack = self.canvas.bbox(back)
@@ -60,6 +60,25 @@ class App(tk.Frame):
         self.canvas.create_rectangle(bboxBack[0], bboxBack[3], bboxBack[2], bboxBack[3] + 1, outline='red', fill = 'red')
         self.canvas.create_rectangle(bboxScreenshot[0], bboxScreenshot[3], bboxScreenshot[2], bboxScreenshot[3] + 1, outline='green', fill = 'green')
         self.canvas.create_rectangle(bboxToggle[0], bboxToggle[3], bboxToggle[2], bboxToggle[3] + 1, outline='blue', fill = 'blue')
+        
+        # Add button hover logic
+        def buttonEnter(event, button):
+            self.canvas.itemconfig(button, fill='#FFA500')
+            
+            self.canvas.config(cursor='cross')
+            self.canvas.update()
+            
+        def buttonLeave(event):
+            self.canvas.itemconfig('button', fill='black')
+            
+            self.canvas.config(cursor='')
+            self.canvas.update()
+        
+        self.canvas.tag_bind('back-button', '<Enter>', lambda event: buttonEnter(event, 'back-button'))
+        self.canvas.tag_bind('screenshot-button', '<Enter>', lambda event: buttonEnter(event, 'screenshot-button'))
+        self.canvas.tag_bind('toggle-camera', '<Enter>', lambda event: buttonEnter(event, 'toggle-camera'))
+        
+        self.canvas.tag_bind('button', '<Leave>', buttonLeave)
         
         # Go back to help page
         self.canvas.tag_bind('back-button', '<Button-1>', self.backButton)

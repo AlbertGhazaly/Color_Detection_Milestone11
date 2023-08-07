@@ -73,6 +73,28 @@ class Start(tk.Frame):
         mycanvas.create_rectangle(bboxFolder[0], bboxFolder[3], bboxFolder[2], bboxFolder[3] + 2, outline='yellow', fill = 'yellow')
         mycanvas.create_rectangle(bboxExit[0], bboxExit[3], bboxExit[2], bboxExit[3] + 2, outline='red', fill = 'red')
         
+        # Create button hover logic
+        def buttonEnter(event, button):
+            mycanvas.itemconfig(button, fill='#FFA500')
+            
+            mycanvas.config(cursor='cross')
+            mycanvas.update()
+            
+        def buttonLeave(event):
+            mycanvas.itemconfig('button_tag', fill='black')
+            mycanvas.itemconfig('start_tag', fill='black')
+            
+            mycanvas.config(cursor='')
+            mycanvas.update()
+            
+        mycanvas.tag_bind('start_tag', '<Enter>', lambda event: buttonEnter(event, 'start_tag'))
+        mycanvas.tag_bind('help_tag', '<Enter>', lambda event: buttonEnter(event, 'help_tag'))
+        mycanvas.tag_bind('folder_tag', '<Enter>', lambda event: buttonEnter(event, 'folder_tag'))
+        mycanvas.tag_bind('exit_tag', '<Enter>', lambda event: buttonEnter(event, 'exit_tag'))
+        
+        mycanvas.tag_bind('button_tag', '<Leave>', buttonLeave)
+        mycanvas.tag_bind('start_tag', '<Leave>', buttonLeave)
+        
         # Footer
         mycanvas.create_rectangle(0, 540, 720, 500, fill="#D9D9D9", outline = "#D9D9D9")
         mycanvas.create_text(360,520, text="Created by SPARTANS MS-11", fill = "black", font='Aerial 10', tags="text_tag")
