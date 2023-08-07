@@ -83,6 +83,9 @@ class App(tk.Frame):
         # Go back to help page
         self.canvas.tag_bind('back-button', '<Button-1>', self.backButton)
         
+        # Screenshot window
+        self.canvas.tag_bind('screenshot-button', '<Button-1>', self.screenshot)
+        
         # Toggle camera on/off
         self.cameraRunning = True
         self.canvas.tag_bind('toggle-camera', '<Button-1>', self.toggleCamera)
@@ -166,12 +169,15 @@ class App(tk.Frame):
     def backButton(self, event):
         self.show_page_callback('page2')
         
-    def screenshot(self):
-        x, y, w, h = self.winfo_x(), self.winfo_y(), self.winfo_width(), self.winfo_height()
+    def screenshot(self, event):
+        # x, y, w, h = self.winfo_x(), self.winfo_y(), self.winfo_width(), self.winfo_height()
         
-        print(x, y, x+w, y+h)
+        handle = FindWindow(None, "Color Detection App")
+        window_rect = GetWindowRect(handle)
         
-        screenshot = ImageGrab.grab(bbox=(x, y, x + w + 200, y + h + 200))
+        # print(window_rect)
+        
+        screenshot = ImageGrab.grab(bbox=(window_rect[0], window_rect[1], window_rect[0] + 1000, window_rect[1] + 800))
         path = filedialog.asksaveasfilename(defaultextension='.png', filetypes=[("PNG files", "*.png"), ("All Files", "*.*")])
         
         if path:
