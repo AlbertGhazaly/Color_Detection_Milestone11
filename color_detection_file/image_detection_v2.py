@@ -30,7 +30,8 @@ while(1):
 	yellow_mask = cv2.inRange(hsvFrame, np.array(color_dict_HSV["yellow"][1], np.uint8), np.array(color_dict_HSV["yellow"][0], np.uint8))
 	purple_mask = cv2.inRange(hsvFrame, np.array(color_dict_HSV["purple"][1], np.uint8), np.array(color_dict_HSV["purple"][0], np.uint8))
 	orange_mask = cv2.inRange(hsvFrame, np.array(color_dict_HSV["orange"][1], np.uint8), np.array(color_dict_HSV["orange"][0], np.uint8))
-	gray_mask = cv2.inRange(hsvFrame, np.array(color_dict_HSV["gray"][1], np.uint8), np.array(color_dict_HSV["gray"][0], np.uint8))
+	brown_mask = cv2.inRange(hsvFrame, np.array(color_dict_HSV["brown"][1], np.uint8), np.array(color_dict_HSV["brown"][0], np.uint8))
+	
 
 
 	# Morphological Transform, Dilation
@@ -76,11 +77,12 @@ while(1):
 	res_orange = cv2.bitwise_and(imageFrame, imageFrame,
 							mask = orange_mask)
 	# For blue color
-	gray_mask = cv2.dilate(gray_mask, kernel)
-	res_gray = cv2.bitwise_and(imageFrame, imageFrame,
-							mask = gray_mask)
+	brown_mask = cv2.dilate(brown_mask, kernel)
+	res_brown = cv2.bitwise_and(imageFrame, imageFrame,
+							mask = brown_mask)
+	
 	color_mask_list = [black_mask,white_mask,red_mask,Red_mask,green_mask,blue_mask,yellow_mask,
-		    purple_mask,orange_mask,gray_mask]
+		    purple_mask,orange_mask,brown_mask]
 	for order in range(0,10):
 		# Creating contour to track each color
 		contours, hierarchy = cv2.findContours(color_mask_list[order],
@@ -89,7 +91,7 @@ while(1):
 
 		for pic, contour in enumerate(contours):
 			area = cv2.contourArea(contour)
-			if(area > 300):
+			if(area > 1500): #Size of color detected
 				x, y, w, h = cv2.boundingRect(contour)
 				imageFrame = cv2.rectangle(imageFrame, (x, y),
 			       						(x + w, y + h),
@@ -100,7 +102,6 @@ while(1):
 							tuple(color_dict_BGR[color_list[order]]))		
 	# Program Termination
 	cv2.imshow("Multiple Color Detection in Real-TIme", imageFrame)
-	if cv2.waitKey(10) & 0xFF == ord('q'):
-		webcam.release()
-		cv2.destroyAllWindows()
+	key = cv2.waitKey(1)
+	if key == 27: # press 'esc'
 		break

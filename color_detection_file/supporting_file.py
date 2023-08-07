@@ -7,7 +7,7 @@ import numpy as np
 
 color_list = ["black","white","red","Red","green","blue","yellow","purple","orange","brown"]
 color_dict_HSV = {'black': [[179, 255, 40], [0, 0, 0]],
-              'white': [[179, 30, 255], [0, 0, 210]],
+              'white': [[179, 30, 255], [0, 0, 200]],
               'red': [[180, 255, 255], [159, 50, 70]],
               'Red': [[10, 255, 255], [0, 100, 100]],
               'green': [[70, 255, 255], [50, 100, 100]],
