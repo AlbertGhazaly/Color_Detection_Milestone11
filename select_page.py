@@ -2,8 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter.messagebox import showinfo
 from tkinter import * 
-
-access_cam = True
+from camera_page import access_cam
 class Select(tk.Frame):
     def __init__(self, parent, show_page_callback):
         super().__init__(parent)
@@ -52,8 +51,10 @@ class Select(tk.Frame):
     def start_app(self,event):
         access_cam = False
         self.show_page_callback('page3')
+        print("access_cam: ", access_cam)
     def start_app2(self,event):
         access_cam = True
-        self.show_page_callback('page6')
+        self.show_page_callback('page3')
+        print("access cam:", access_cam)
 
 

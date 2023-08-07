@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import Canvas
 from camera_page import App
-from camera2_page import App2
 from start_page import Start
 from about_page import About
 from help_page import Help
@@ -27,7 +26,6 @@ class MyApp(tk.Tk):
         self.pages["page4"] = Help(self, self.show_page)
         self.pages["page5"] = Select(self, self.show_page)
         self.pages["page3"] = App(self, self.show_page)
-        self.pages['page6'] = App2(self,self.show_page)
             
 
     def show_page(self, page_name):

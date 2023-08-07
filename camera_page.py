@@ -6,13 +6,13 @@ import tkinter as tk
 from tkinter import ttk, filedialog
 from tkinter import *
 from PIL import Image, ImageTk, ImageGrab
-from select_page import access_cam
 from win32gui import FindWindow, GetWindowRect
 import pygetwindow as gw
+import numpy as np
 
 
 from color_detection_file.supporting_file import *
-
+access_cam = True
 class App(tk.Frame):
     def __init__(self, parent, show_page_callback):
         super().__init__(parent)
@@ -79,72 +79,172 @@ class App(tk.Frame):
             
     def main(self):
         print("Main is running")
-        if access_cam:
-            self.updateFrame()
+        self.updateFrame()
     
     def updateFrame(self):
+        print("real access_cam: ", access_cam)
         if self.cameraRunning:
             _, frame = self.webcam.read()
             self.save_frame = frame
-            
-            tk_width, tk_height = self.get_tk_win_size()
-            aspect_ratio_w = 4
-            aspect_ratio_h = 3
-            
-            pengali = (tk_height / 3) if (tk_width > tk_height) else int(tk_width) / 4
-            
-            if frame is not None:
-                height, width, _ = frame.shape
-                # change BGR to HSV color format
-                hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-                frame = cv2.flip(frame, 1) # flip frames
+            if not access_cam:   
+                tk_width, tk_height = self.get_tk_win_size()
+                aspect_ratio_w = 4
+                aspect_ratio_h = 3
                 
-                # get center coordinate (x, y) of window
-                cx = int(width / 2)
-                cy = int(height / 2)
+                pengali = (tk_height / 3) if (tk_width > tk_height) else int(tk_width) / 4
                 
-                # pick pixel value
-                pixel_center = hsv_frame[cy, cx]
+                if frame is not None:
+                    height, width, _ = frame.shape
+                    # change BGR to HSV color format
+                    hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+                    frame = cv2.flip(frame, 1) # flip frames
+                    
+                    # get center coordinate (x, y) of window
+                    cx = int(width / 2)
+                    cy = int(height / 2)
+                    
+                    # pick pixel value
+                    pixel_center = hsv_frame[cy, cx]
+                    
+                    color = (color_decider(pixel_center))
+                    pixel_center_bgr = frame[cy, cx]
+                    b, g, r = int(pixel_center_bgr[0]), int(pixel_center_bgr[1]), int(pixel_center_bgr[2])
+
+                    # color = (color_decider(pixel_center))
+                    
+                    # #testing
+
+                    # hex_value = self.rgb_to_hex(r,g,b)
+
+                    # if color == "undefined":
+                    #     self.color = ""
+                    # else :
+                    #     self.color = color
+
+                    # self.colorframe =tk.Frame( width=70,height=40,bg=hex_value).pack()
+
+                    # self.namacolor = tk.Frame(width =70 ,height=40).pack()
+                    # tk.Label(self.namacolor , text=self.color,font=(50)).pack()
+
+                    # add square
+                    cv2.rectangle(frame, (cx-5, cy-5), (cx+5, cy+5), (255, 0, 0), 1)
+
+                    # add text
+                    cv2.putText(frame, color, (10, 50), 0, 1, (b, g, r), 2)
+                    # colorLabel.config(text=color)
+                    
+                    frame = cv2.resize(frame, (433, 325))
+                    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # Convert from BGR to RGB
+                    image = Image.fromarray(frame)  # Create an Image object from the frame
+                    photo = ImageTk.PhotoImage(image=image)  # Create a PhotoImage from the Image object
+                    self.videoLabel.config(image=photo)  # Update the videoLabel with the new image
+                    self.videoLabel.image = photo  # Keep a reference to the PhotoImage to prevent garbage collection
+                    
+                    # Edit GUI color label
+                    hex = self.rgb_to_hex(r, g, b)
+                    self.canvas.itemconfig(self.colorImage, fill = hex)
+                    self.canvas.itemconfig(self.colorLabel, text=color)
+                    self.canvas.itemconfig(self.colorHex, text = hex)
+
+                    self.after(10, self.updateFrame)
+            else:
+                # Reading the video from the
+                # webcam in image frames
+                # Convert the imageFrame in
+                # BGR(RGB color space) to
+                # HSV(hue-saturation-value)
+                # color space
+                hsvFrame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+
+                # define mask for each color using range of color
+                # mask = cv2.inRange(frame, lower range, upper range)
+                black_mask = cv2.inRange(hsvFrame, np.array(color_dict_HSV["black"][1], np.uint8), np.array(color_dict_HSV["black"][0], np.uint8))
+                white_mask = cv2.inRange(hsvFrame, np.array(color_dict_HSV["white"][1], np.uint8), np.array(color_dict_HSV["white"][0], np.uint8))
+                red_mask = cv2.inRange(hsvFrame, np.array(color_dict_HSV["red"][1], np.uint8), np.array(color_dict_HSV["red"][0], np.uint8))
+                Red_mask = cv2.inRange(hsvFrame, np.array(color_dict_HSV["Red"][1], np.uint8), np.array(color_dict_HSV["Red"][0], np.uint8))
+                green_mask = cv2.inRange(hsvFrame, np.array(color_dict_HSV["green"][1], np.uint8), np.array(color_dict_HSV["green"][0], np.uint8))
+                blue_mask = cv2.inRange(hsvFrame, np.array(color_dict_HSV["blue"][1], np.uint8), np.array(color_dict_HSV["blue"][0], np.uint8))
+                yellow_mask = cv2.inRange(hsvFrame, np.array(color_dict_HSV["yellow"][1], np.uint8), np.array(color_dict_HSV["yellow"][0], np.uint8))
+                purple_mask = cv2.inRange(hsvFrame, np.array(color_dict_HSV["purple"][1], np.uint8), np.array(color_dict_HSV["purple"][0], np.uint8))
+                orange_mask = cv2.inRange(hsvFrame, np.array(color_dict_HSV["orange"][1], np.uint8), np.array(color_dict_HSV["orange"][0], np.uint8))
+                brown_mask = cv2.inRange(hsvFrame, np.array(color_dict_HSV["brown"][1], np.uint8), np.array(color_dict_HSV["brown"][0], np.uint8))
                 
-                color = (color_decider(pixel_center))
-                pixel_center_bgr = frame[cy, cx]
-                b, g, r = int(pixel_center_bgr[0]), int(pixel_center_bgr[1]), int(pixel_center_bgr[2])
 
-                # color = (color_decider(pixel_center))
+
+                # Morphological Transform, Dilation
+                # for each color and bitwise_and operator
+                # between imageFrame and mask determines
+                # to detect only that particular color
+                kernel = np.ones((5, 5), "uint8")
+
+                # For red color
+                black_mask = cv2.dilate(black_mask, kernel)
+                res_black = cv2.bitwise_and(frame, frame,
+                                        mask = black_mask)
+                # For red color
+                white_mask = cv2.dilate(white_mask, kernel)
+                res_white = cv2.bitwise_and(frame, frame,
+                                        mask = white_mask)
+                # For red color
+                red_mask = cv2.dilate(red_mask, kernel)
+                res_red = cv2.bitwise_and(frame, frame,
+                                        mask = red_mask)
+                # For red color
+                Red_mask = cv2.dilate(Red_mask, kernel)
+                res_Red = cv2.bitwise_and(frame, frame,
+                                        mask = Red_mask)
+                # For green color
+                green_mask = cv2.dilate(green_mask, kernel)
+                res_green = cv2.bitwise_and(frame, frame,
+                                            mask = green_mask)
+                # For blue color
+                blue_mask = cv2.dilate(blue_mask, kernel)
+                res_blue = cv2.bitwise_and(frame, frame,
+                                        mask = blue_mask)
+                    # For blue color
+                yellow_mask = cv2.dilate(yellow_mask, kernel)
+                res_yellow = cv2.bitwise_and(frame, frame,
+                                        mask = yellow_mask)
+                # For blue color
+                purple_mask = cv2.dilate(purple_mask, kernel)
+                res_purple = cv2.bitwise_and(frame, frame,
+                                        mask = purple_mask)
+                # For blue color
+                orange_mask = cv2.dilate(orange_mask, kernel)
+                res_orange = cv2.bitwise_and(frame, frame,
+                                        mask = orange_mask)
+                # For blue color
+                brown_mask = cv2.dilate(brown_mask, kernel)
+                res_brown = cv2.bitwise_and(frame, frame,
+                                        mask = brown_mask)
                 
-                # #testing
+                color_mask_list = [black_mask,white_mask,red_mask,Red_mask,green_mask,blue_mask,yellow_mask,
+                        purple_mask,orange_mask,brown_mask]
+                for order in range(0,10):
+                    # Creating contour to track each color
+                    contours, hierarchy = cv2.findContours(color_mask_list[order],
+                                                        cv2.RETR_TREE,
+                                                        cv2.CHAIN_APPROX_SIMPLE)
 
-                # hex_value = self.rgb_to_hex(r,g,b)
-
-                # if color == "undefined":
-                #     self.color = ""
-                # else :
-                #     self.color = color
-
-                # self.colorframe =tk.Frame( width=70,height=40,bg=hex_value).pack()
-
-                # self.namacolor = tk.Frame(width =70 ,height=40).pack()
-                # tk.Label(self.namacolor , text=self.color,font=(50)).pack()
-
-                # add square
-                cv2.rectangle(frame, (cx-5, cy-5), (cx+5, cy+5), (255, 0, 0), 1)
-
-                # add text
-                cv2.putText(frame, color, (10, 50), 0, 1, (b, g, r), 2)
-                # colorLabel.config(text=color)
-                
+                    for pic, contour in enumerate(contours):
+                        area = cv2.contourArea(contour)
+                        if(area > 1500): #Size of color detected
+                            x, y, w, h = cv2.boundingRect(contour)
+                            frame = cv2.rectangle(frame, (x, y),
+                                                    (x + w, y + h),
+                                                    tuple(color_dict_BGR[color_list[order]]), 2)
+                            
+                            cv2.putText(frame, color_list[order], (x, y),
+                                        cv2.FONT_HERSHEY_SIMPLEX, 1.0,
+                                        tuple(color_dict_BGR[color_list[order]]))	
                 frame = cv2.resize(frame, (433, 325))
                 frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # Convert from BGR to RGB
                 image = Image.fromarray(frame)  # Create an Image object from the frame
                 photo = ImageTk.PhotoImage(image=image)  # Create a PhotoImage from the Image object
                 self.videoLabel.config(image=photo)  # Update the videoLabel with the new image
-                self.videoLabel.image = photo  # Keep a reference to the PhotoImage to prevent garbage collection
-                
-                # Edit GUI color label
-                hex = self.rgb_to_hex(r, g, b)
-                self.canvas.itemconfig(self.colorImage, fill = hex)
-                self.canvas.itemconfig(self.colorLabel, text=color)
-                self.canvas.itemconfig(self.colorHex, text = hex)
+                self.videoLabel.image = photo  #	
+                        
+
                 
                 self.after(10, self.updateFrame) # Rerun updateFrame function after 10 miliseconds
 
