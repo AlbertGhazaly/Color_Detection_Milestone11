@@ -1,12 +1,5 @@
 # Color_Detection_Milestone11
 
-## Tasks
-
-1. Create repository (Albert)
-2. Computer vision with camera (Edbert)
-3. Color detection (basic colors) (Edbert)
-4. Adding more colors (Albert)
-5. Improvement (Albert & Edbert)
 
 ## Deskripsi Masalah
 
@@ -44,8 +37,34 @@ Dengan memanfaatkan perkembangan teknologi yang telah ada sekarang, kami sebagai
 
 ## How to Use
 
-- Buka aplikasi
-- Pada homepage akan ada 5 tombol yang dapat diakses
+1.  Buka aplikasi srd/root_app.py
+2. Terdapat 4 opsi yang dapat digunakan:
+   - START
+   - Help :
+      - Menampilkan instruksi cara penggunaan aplikasi
+      - Di bagian kiri bawah ada tombol back, jika ditekan akan membawa layar kembali ke halaman utama
+   - Folder:
+      - menyimpan screenshot atau file gambar
+
+   - Exit:
+      - keluar dari program
+3. Ketika klik start maka akan terdapat about page dan terdapat 2 opsi:
+   - return to home:
+      - kembali ke halaman pertama
+   - Start App:
+      - Memulai color detection app 
+4. Klik Start App, terdapat empat opsi:
+   - Mode:
+      - mengganti jenis color detection
+      - color detection terbagi jadi dua, yakni single color detection dan multi coloor detection
+   - Back:
+      - kembali ke halaman sebelumnya (about page)
+   - Screenshot:
+      - mengambil gambar 
+   - Toggle Camera:
+      - menyalakan atau mematikan kamera
+
+Keterangan lebih lanjut:
 
 Kamera :
 
