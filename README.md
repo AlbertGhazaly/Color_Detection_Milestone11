@@ -80,10 +80,10 @@ Folder :
 | 19622091 |        Dinda Thalia Fahira         | Membuat About Page                                                                                                |
 | 19622093 |          Micky Valentino           | Tab Start, Desain dan Coding                                                                                              |
 | 19622194 |         Theo Livius Natael         | Codingan membuat Layout Camera Page dan Desain                                                                                              |
-| 19622223 |        Louis Ferdyo Gunawan        | Membuat Help Page                                                                                               ... |
+| 19622223 |        Louis Ferdyo Gunawan        | Membuat Help Page                                                                                               |
 | 19622224 |            Kayla Dyara             | Membuat ReadMe deskripsi  masalah dan lembar kontribusi                                                                                               |
 | 19622230 |   Muhammad Rasheed Qais Tandjung   |   Menulis kode camera page dan style tombol aplikasi                                                                                           |
-| 19622293 |           Albert Ghazaly           | Color adding (BGR & HSV) di supporting_file, desain dan bikin multicolor detection, menggabungkan dan mengimplementasikan multicolor detection ke camera_page untuk aplikasi, debugging camera error                                                                                    ...           |
+| 19622293 |           Albert Ghazaly           | Color adding (BGR & HSV) di supporting_file, desain dan bikin multicolor detection, menggabungkan dan mengimplementasikan multicolor detection ke camera_page untuk aplikasi, debugging camera error                                                                                               |
 | 19622311 |           Jimly Nur Arif           |                                                                                                ... |
 
 ## Reference
