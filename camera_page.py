@@ -1,8 +1,10 @@
 import os
 import sys
+import time
 import cv2
 import tkinter as tk
 from tkinter import ttk, filedialog
+from tkinter import *
 from PIL import Image, ImageTk, ImageGrab
 
 from win32gui import FindWindow, GetWindowRect
@@ -12,94 +14,69 @@ import pygetwindow as gw
 from color_detection_file.supporting_file import *
 
 class App(tk.Frame):
-    
-    def __init__(self, parent):
+    def __init__(self, parent, show_page_callback):
         super().__init__(parent)
+        self.show_page_callback = show_page_callback
         
-        # self.minsize(1100,540)
-        # self.geometry("720x540")
+        # Canvas
+        self.canvas = Canvas(self, width = 720, height=540, bg="white")
+        self.canvas.create_rectangle(0, 0, 720, 75, outline = "light grey", fill="light grey")
+        self.canvas.pack()
         self.save_frame = ""
-        # self.title('color')
         
-        # Column 2 - Camera
+        # Color label
+        self.colorImage = self.canvas.create_rectangle(140, 16, 190, 66, fill='blue')
+        
+        self.colorLabel = self.canvas.create_text(200, 32, text='Blue', font= 'Aerial 12', anchor='w')
+        
+        self.colorHex = self.canvas.create_text(200, 49, text='#FFFFF', font= 'Aerial 12', anchor='w')
+        
+        # Select detection mode
+        yMode = 16
+        tk.Label(self, text='Mode:', font='Aerial 14 bold').place(x=528, y= yMode + 7)
+        tk.Label(self,text="Single Color").place(x=600, y= yMode)
+        tk.Label(self,text="Detection").place(x=600, y= yMode + 27)
+        
+        # Camera Section
+        self.cameraTop = 110
+        self.canvas.create_rectangle(115, self.cameraTop, 608, 470, outline = "light grey", fill="light grey")
+        
         self.videoLabel = tk.Label(self)
-        self.videoLabel.grid(row=1, column=1, columnspan=3,sticky="W")
+        self.videoLabel.place(x=145, y=self.cameraTop)
         self.webcam = cv2.VideoCapture(0)
                 
-        # Column 3 - Back Button
-        self.back = ttk.Button(self, text="Back")
-        self.back# .grid(row=2,column=0)
+        # Camera Footer
+        # width, height = 433, 325
+        # camera bottom y = 415
+        back = self.canvas.create_text(190, self.cameraTop + 343, text='Back', font='Aerial 12', tags='back-button')
+        screenshot = self.canvas.create_text(335, self.cameraTop + 343, text='Screenshot', font='Aerial 12')
+        toggle = self.canvas.create_text(510, self.cameraTop + 343, text='Toggle Camera', font='Aerial 12', tags= 'toggle-camera')
         
-        #warna
+        # Add underline to buttons
+        bboxBack = self.canvas.bbox(back)
+        bboxScreenshot = self.canvas.bbox(screenshot)
+        bboxToggle = self.canvas.bbox(toggle)
         
+        self.canvas.create_rectangle(bboxBack[0], bboxBack[3], bboxBack[2], bboxBack[3] + 1, outline='red', fill = 'red')
+        self.canvas.create_rectangle(bboxScreenshot[0], bboxScreenshot[3], bboxScreenshot[2], bboxScreenshot[3] + 1, outline='green', fill = 'green')
+        self.canvas.create_rectangle(bboxToggle[0], bboxToggle[3], bboxToggle[2], bboxToggle[3] + 1, outline='blue', fill = 'blue')
         
-        #mode
-        self.mode= tk.Frame(width=140,height=50) #.grid(row = 0,column= 3,padx=50,pady=10)
-        tk.Label(self.mode,text="Single Color " ) #.grid(row = 0,column= 3,padx=5,pady=10,sticky="NW")
-        tk.Label(self.mode,text="Detection" ) #.grid(row = 0,column= 3,padx=5,pady=10,sticky="SW")
-        #switch mode 
-        self.switch = ttk.Button(self, text ="switch mode").grid(row=0,column=3)
+        # Go back to help page
+        self.canvas.tag_bind('back-button', '<Button-1>', self.backButton)
         
-        # photo button
-
-        self.photo = ttk.Button(self, text="Take Photo", command = self.screenshot)
-        self.photo.grid(row=2, column=1)
-        
-        # Column 3 - Toggle Camera Button
-        self.toggle = tk.BooleanVar()
-        self.toggle.set(True)
+        # Toggle camera on/off
         self.cameraRunning = True
-        self.toggleCamera = tk.Checkbutton(self, text="Toggle Camera", variable = self.toggle, command=self.toggleCamera)
-        self.toggleCamera.grid(row=2, column=2)
+        self.canvas.tag_bind('toggle-camera', '<Button-1>', self.toggleCamera)
         
-        # proportional size
-        for i in range(3):
-            self.rowconfigure(i, weight = 1)
-            self.columnconfigure(i, weight = 1)
-            
-        self.after(1000, self.main)
+        # Page footer
+        self.canvas.create_rectangle(0, 540, 720, 500, fill="#D9D9D9", outline = "#D9D9D9")
+        self.canvas.create_text(360,520, text="Created by SPARTANS MS-11", fill = "black", font='Aerial 10', tags="text_tag")
+        
+        self.main()
             
     def main(self):
+        print("Main is running")
         self.updateFrame()
-        
-    def screenshot(self):
-        x, y, w, h = self.winfo_x(), self.winfo_y(), self.winfo_width(), self.winfo_height()
-        
-        print(x, y, x+w, y+h)
-        
-        screenshot = ImageGrab.grab(bbox=(x, y, x + w + 200, y + h + 200))
-        path = filedialog.asksaveasfilename(defaultextension='.png', filetypes=[("PNG files", "*.png"), ("All Files", "*.*")])
-        
-        if path:
-            screenshot.save(path)
-        
-    def toggleCamera(self):
-        self.cameraRunning = not self.cameraRunning
-        if self.cameraRunning:
-            self.startCamera()
-        else:
-            self.stopCamera()
-        
-    def startCamera(self):
-        self.cameraRunning = True
-        self.videoLabel.grid_forget()
-        
-        self.videoLabel = tk.Label(self)
-        self.videoLabel.grid(row=1, column=0, columnspan=3)
-        self.webcam = cv2.VideoCapture(0)
-        
-        self.updateFrame()
-        
-    def stopCamera(self):
-        self.cameraRunning = False
-        self.webcam.release()
-        
-        self.videoLabel.grid_forget()
-        message_label = tk.Label(self, text="Video camera has been turned off.")
-        message_label.grid(row=1, column=0, columnspan=3)
-    
-    def get_tk_win_size(self):
-        return self.winfo_width(), self.winfo_height()
     
     def updateFrame(self):
         if self.cameraRunning:
@@ -111,8 +88,6 @@ class App(tk.Frame):
             aspect_ratio_h = 3
             
             pengali = (tk_height / 3) if (tk_width > tk_height) else int(tk_width) / 4
-           
-            frame = cv2.resize(frame, (int(8*pengali*aspect_ratio_w/10), int(pengali*aspect_ratio_h*8/10)))
             
             if frame is not None:
                 height, width, _ = frame.shape
@@ -131,23 +106,22 @@ class App(tk.Frame):
                 pixel_center_bgr = frame[cy, cx]
                 b, g, r = int(pixel_center_bgr[0]), int(pixel_center_bgr[1]), int(pixel_center_bgr[2])
 
-                color = (color_decider(pixel_center))
-                #testing
+                # color = (color_decider(pixel_center))
+                
+                # #testing
 
-                hex_value = self.rgb_to_hex(r,g,b)
+                # hex_value = self.rgb_to_hex(r,g,b)
 
+                # if color == "undefined":
+                #     self.color = ""
+                # else :
+                #     self.color = color
 
-                if color == "undefined":
-                    self.color = ""
-                else :
-                    self.color = color
+                # self.colorframe =tk.Frame( width=70,height=40,bg=hex_value).pack()
 
-                self.colorframe =tk.Frame( width=70,height=40,bg=hex_value).grid(padx=50,pady=10,row=0,column=0)
+                # self.namacolor = tk.Frame(width =70 ,height=40).pack()
+                # tk.Label(self.namacolor , text=self.color,font=(50)).pack()
 
-                self.namacolor = tk.Frame(width =70 ,height=40).grid(padx=0,pady=10,row=0,column=1,sticky="W")
-                tk.Label(self.namacolor , text=self.color,font=(50)).grid(padx=0,row=0,column=1,pady=0,sticky="W")
-
-            
                 # add square
                 cv2.rectangle(frame, (cx-5, cy-5), (cx+5, cy+5), (255, 0, 0), 1)
 
@@ -155,17 +129,66 @@ class App(tk.Frame):
                 cv2.putText(frame, color, (10, 50), 0, 1, (b, g, r), 2)
                 # colorLabel.config(text=color)
                 
+                frame = cv2.resize(frame, (433, 325))
                 frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # Convert from BGR to RGB
                 image = Image.fromarray(frame)  # Create an Image object from the frame
                 photo = ImageTk.PhotoImage(image=image)  # Create a PhotoImage from the Image object
                 self.videoLabel.config(image=photo)  # Update the videoLabel with the new image
                 self.videoLabel.image = photo  # Keep a reference to the PhotoImage to prevent garbage collection
-            
+                
+                # Edit GUI color label
+                hex = self.rgb_to_hex(r, g, b)
+                self.canvas.itemconfig(self.colorImage, fill = hex)
+                self.canvas.itemconfig(self.colorLabel, text=color)
+                self.canvas.itemconfig(self.colorHex, text = hex)
+                
                 self.after(10, self.updateFrame) # Rerun updateFrame function after 10 miliseconds
 
+    def backButton(self, event):
+        self.show_page_callback('page2')
+        
+    def screenshot(self):
+        x, y, w, h = self.winfo_x(), self.winfo_y(), self.winfo_width(), self.winfo_height()
+        
+        print(x, y, x+w, y+h)
+        
+        screenshot = ImageGrab.grab(bbox=(x, y, x + w + 200, y + h + 200))
+        path = filedialog.asksaveasfilename(defaultextension='.png', filetypes=[("PNG files", "*.png"), ("All Files", "*.*")])
+        
+        if path:
+            screenshot.save(path)
+        
+    def toggleCamera(self, event):
+        self.cameraRunning = not self.cameraRunning
+        if self.cameraRunning:
+            self.startCamera()
+        else:
+            self.stopCamera()
+    
+    def startCamera(self):
+        self.cameraRunning = True
+        self.videoLabel.destroy()
+        
+        self.videoLabel = tk.Label(self, text = 'Starting up camera')
+        self.videoLabel.place(x=265, y = 275)
+        
+        self.videoLabel.destroy()
+        self.videoLabel = tk.Label(self)
+        self.videoLabel.place(x=145, y=self.cameraTop)
+        self.webcam = cv2.VideoCapture(0)
+        
+        self.updateFrame()
+        
+    def stopCamera(self):
+        self.cameraRunning = False
+        self.webcam.release()
+        
+        self.videoLabel.destroy()
+        self.videoLabel = tk.Label(self, text="Video camera has been turned off.")
+        self.videoLabel.place(x=265, y = 255)
+    
+    def get_tk_win_size(self):
+        return self.winfo_width(), self.winfo_height()
+    
     def rgb_to_hex(self, r, g, b):
         return '#{:02x}{:02x}{:02x}'.format(r, g, b)
-
-# app = App()
-# app.mainloop()
-

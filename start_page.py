@@ -3,7 +3,7 @@ from about_page import *
 from help_page import *
 from tkinter import *
 
-from main import App
+# from root_app import App
 
 
 # a subclass of Canvas for dealing with resizing of windows
@@ -50,16 +50,31 @@ class Start(tk.Frame):
 
         # header
         mycanvas.create_rectangle(0, 75, 720, 0, fill="#D9D9D9", outline = "#D9D9D9")
-        mycanvas.create_text(360,30, text="Color Detection APP", fill = "black", font='Aerial 40', tags="title_tag")
+        mycanvas.create_text(360, 40, text="MS-11 Color Detector", fill = "black", font='Aerial 40', tags="title_tag")
         # middle
         mycanvas.create_rectangle(150, 425, 570, 150, fill="#D9D9D9", outline = "#D9D9D9")
-        mycanvas.create_text(360,240, text="START", fill = "black", font='Helvetica 40', tags=["title_tag", "start_tag"])
-        mycanvas.create_text(200,390, text="Help", fill = "black", font='Helvetica 20', tags=["help_tag", "button_tag"])
-        mycanvas.create_text(360,390, text="Folder", fill = "black", font='Helvetica 20', tags=["folder_tag", "button_tag"])
-        mycanvas.create_text(520,390, text="Exit", fill = "black", font='Helvetica 20', tags=["exit_tag", "button_tag"])
+        
+        start = mycanvas.create_text(360, 260, text="START", fill = "black", font='Helvetica 40', tags=["title_tag", "start_tag"])
+        
+        help = mycanvas.create_text(200,390, text="Help", fill = "black", font='Helvetica 20', tags=["help_tag", "button_tag"])
+        folder = mycanvas.create_text(360,390, text="Folder", fill = "black", font='Helvetica 20', tags=["folder_tag", "button_tag"])
+        exit = mycanvas.create_text(520,390, text="Exit", fill = "black", font='Helvetica 20', tags=["exit_tag", "button_tag"])
         #footer
+        
+        # Add underline to buttons
+        bboxStart = mycanvas.bbox(start)
+        bboxHelp = mycanvas.bbox(help)
+        bboxFolder = mycanvas.bbox(folder)
+        bboxExit = mycanvas.bbox(exit)
+        
+        mycanvas.create_rectangle(bboxStart[0], bboxStart[3], bboxStart[2], bboxStart[3] + 2, outline='green', fill = 'green')
+        mycanvas.create_rectangle(bboxHelp[0], bboxHelp[3], bboxHelp[2], bboxHelp[3] + 2, outline='blue', fill = 'blue')
+        mycanvas.create_rectangle(bboxFolder[0], bboxFolder[3], bboxFolder[2], bboxFolder[3] + 2, outline='yellow', fill = 'yellow')
+        mycanvas.create_rectangle(bboxExit[0], bboxExit[3], bboxExit[2], bboxExit[3] + 2, outline='red', fill = 'red')
+        
+        # Footer
         mycanvas.create_rectangle(0, 540, 720, 500, fill="#D9D9D9", outline = "#D9D9D9")
-        mycanvas.create_text(360,520, text="Created By ....", fill = "black", font='Aerial 10', tags="text_tag")
+        mycanvas.create_text(360,520, text="Created by SPARTANS MS-11", fill = "black", font='Aerial 10', tags="text_tag")
 
         mycanvas.tag_bind("title_tag", "<Button-1>", self.nextButton)
         mycanvas.tag_bind("help_tag", "<Button-1>", self.helpButton)
