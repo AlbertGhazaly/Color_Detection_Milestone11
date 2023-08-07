@@ -56,7 +56,7 @@ class About(tk.Frame):
         self.show_page_callback('page1')
         
     def startApp(self, event):
-        self.show_page_callback('page3')
+        self.show_page_callback('page5')
         
     def main(self):
        # Main Text
