@@ -37,34 +37,8 @@ Dengan memanfaatkan perkembangan teknologi yang telah ada sekarang, kami sebagai
 
 ## How to Use
 
-1.  Buka aplikasi srd/root_app.py
-2. Terdapat 4 opsi yang dapat digunakan:
-   - START
-   - Help :
-      - Menampilkan instruksi cara penggunaan aplikasi
-      - Di bagian kiri bawah ada tombol back, jika ditekan akan membawa layar kembali ke halaman utama
-   - Folder:
-      - menyimpan screenshot atau file gambar
-
-   - Exit:
-      - keluar dari program
-3. Ketika klik start maka akan terdapat about page dan terdapat 2 opsi:
-   - return to home:
-      - kembali ke halaman pertama
-   - Start App:
-      - Memulai color detection app 
-4. Klik Start App, terdapat empat opsi:
-   - Mode:
-      - mengganti jenis color detection
-      - color detection terbagi jadi dua, yakni single color detection dan multi coloor detection
-   - Back:
-      - kembali ke halaman sebelumnya (about page)
-   - Screenshot:
-      - mengambil gambar 
-   - Toggle Camera:
-      - menyalakan atau mematikan kamera
-
-Keterangan lebih lanjut:
+- Buka aplikasi
+- Pada homepage akan ada 5 tombol yang dapat diakses
 
 Kamera :
 
@@ -106,10 +80,10 @@ Folder :
 | 19622091 |        Dinda Thalia Fahira         | Membuat About Page                                                                                                |
 | 19622093 |          Micky Valentino           | Tab Start, Desain dan Coding                                                                                              |
 | 19622194 |         Theo Livius Natael         | Codingan membuat Layout Camera Page dan Desain                                                                                              |
-| 19622223 |        Louis Ferdyo Gunawan        |                                                                                                ... |
+| 19622223 |        Louis Ferdyo Gunawan        | Membuat Help Page                                                                                               ... |
 | 19622224 |            Kayla Dyara             | Membuat ReadMe deskripsi  masalah dan lembar kontribusi                                                                                               |
 | 19622230 |   Muhammad Rasheed Qais Tandjung   |   Menulis kode camera page dan style tombol aplikasi                                                                                           |
-| 19622293 |           Albert Ghazaly           |                                                                                      ...           |
+| 19622293 |           Albert Ghazaly           | Color adding (BGR & HSV) di supporting_file, desain dan bikin multicolor detection, menggabungkan dan mengimplementasikan multicolor detection ke camera_page untuk aplikasi, debugging camera error                                                                                    ...           |
 | 19622311 |           Jimly Nur Arif           |                                                                                                ... |
 
 ## Reference
