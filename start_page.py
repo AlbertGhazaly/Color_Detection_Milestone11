@@ -42,6 +42,7 @@ class Start(tk.Frame):
         super().__init__(parent)
 
         self.show_page_callback = show_page_callback
+        self.parent = parent
 
         self.pack(fill=BOTH, expand=YES)
         # sel.pack(fill=BOTH, expand=YES)
@@ -78,6 +79,7 @@ class Start(tk.Frame):
 
         mycanvas.tag_bind("title_tag", "<Button-1>", self.nextButton)
         mycanvas.tag_bind("help_tag", "<Button-1>", self.helpButton)
+        mycanvas.tag_bind("exit_tag", "<Button-1>", self.exitButton )
         mycanvas.pack()
         # tag all of the drawn widgets
         mycanvas.addtag_all("all")
@@ -90,3 +92,7 @@ class Start(tk.Frame):
     def helpButton(self, event):
         print("ho")
         self.show_page_callback("page4")
+    
+    def exitButton(self, event):
+        print("ho")
+        self.parent.destroy()
