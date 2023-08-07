@@ -4,11 +4,6 @@ import numpy as np
     untuk import file dan bahan2 atau variabel2 yang akan digunain
     
 """
-def median(list1,list2):
-    list = []
-    for i in range(len(list1)):
-        list.append((list1[i]+list2[i])/2)
-    return list
 
 color_list = ["black","white","red","Red","green","blue","yellow","purple","orange","gray"]
 color_dict_HSV = {'black': [[180, 255, 30], [0, 0, 0]],
