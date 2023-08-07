@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter.messagebox import showinfo
 from tkinter import * 
 
+access_cam = True
 class Select(tk.Frame):
     def __init__(self, parent, show_page_callback):
         super().__init__(parent)
@@ -49,8 +50,10 @@ class Select(tk.Frame):
         self.canvas.pack()
 
     def start_app(self,event):
+        access_cam = False
         self.show_page_callback('page3')
     def start_app2(self,event):
+        access_cam = True
         self.show_page_callback('page6')
 
 

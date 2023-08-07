@@ -1,13 +1,13 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import Canvas
-
+from camera_page import App
+from camera2_page import App2
 from start_page import Start
 from about_page import About
 from help_page import Help
-from camera_page import App
 from select_page import Select
-from camera2_page import App2
+
 
 class MyApp(tk.Tk):
     def __init__(self):
@@ -24,10 +24,11 @@ class MyApp(tk.Tk):
         # Create and store instances of your page frames
         self.pages["page1"] = Start(self, self.show_page)
         self.pages["page2"] = About(self, self.show_page)
-        self.pages["page3"] = App(self, self.show_page)
         self.pages["page4"] = Help(self, self.show_page)
         self.pages["page5"] = Select(self, self.show_page)
+        self.pages["page3"] = App(self, self.show_page)
         self.pages['page6'] = App2(self,self.show_page)
+            
 
     def show_page(self, page_name):
         # Show the selected page and hide others

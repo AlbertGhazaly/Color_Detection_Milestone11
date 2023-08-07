@@ -6,7 +6,7 @@ import tkinter as tk
 from tkinter import ttk, filedialog
 from tkinter import *
 from PIL import Image, ImageTk, ImageGrab
-
+from select_page import access_cam
 from win32gui import FindWindow, GetWindowRect
 import pygetwindow as gw
 
@@ -79,7 +79,8 @@ class App(tk.Frame):
             
     def main(self):
         print("Main is running")
-        self.updateFrame()
+        if access_cam:
+            self.updateFrame()
     
     def updateFrame(self):
         if self.cameraRunning:
