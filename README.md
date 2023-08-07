@@ -31,9 +31,9 @@ Dengan visualisasi yang ditampilkan diatas, tentunya mereka akan memiliki kesuli
 
 ## Deskripsi Solusi
 
-Dengan memanfaatkan perkembangan teknologi yang telah ada sekarang, kami sebagai mahasiswa Teknik Informatika dan Sistem Teknologi Informasi yang memiliki rasa empati terhadap kondisi buta warna yang diderita oleh sebagian orang, memutuskan untuk mendesain Color Detection App for Color Blind People. Color Detection App for Color Blind People adalah sebuah aplikasi yang dirancang khusus untuk membantu orang-orang dengan gangguan penglihatan warna. Aplikasi ini bertujuan untuk membantu pengguna dengan daltonisme dengan mengidentifikasi warna yang ada di sekitar mereka. Dengan menggunakan kamera ponsel atau perangkat lain, aplikasi akan mengenali warna objek dalam pandangan dan menginformasikan pengguna tentang warna tersebut.<br>
+Dengan memanfaatkan perkembangan teknologi yang telah ada sekarang, kami sebagai mahasiswa Teknik Informatika dan Sistem Teknologi Informasi yang memiliki rasa empati terhadap kondisi buta warna yang diderita oleh sebagian orang, memutuskan untuk mendesain Color Detection App for Color Blind People. Color Detection App for Color Blind People adalah sebuah aplikasi yang dirancang khusus untuk membantu orang-orang dengan gangguan penglihatan warna. Aplikasi ini bertujuan untuk membantu pengguna dengan daltonisme dengan mengidentifikasi warna yang ada di sekitar mereka. Dengan menggunakan kamera ponsel atau perangkat lain, aplikasi akan mengenali warna objek dalam pandangan dan menginformasikan pengguna tentang warna tersebut. <br>
 
-jsjsjsj
+
 
 ## Requirement program dan Instalasi
 
@@ -80,22 +80,22 @@ Folder :
 | NIM      |                Nama                |                                                                                         Kontribusi |
 | -------- | :--------------------------------: | -------------------------------------------------------------------------------------------------: |
 | 19622011 | Muhamad Rifki Virziadeili Harisman | README (Deskripsi Masalah, Deskripsi Solusi, Lembar Kontribusi, Requirement program dan Instalasi) |
-| 19622034 |          Abdullah Mubarak          |                                                                                                ... |
-| 19622066 |          Vanson Kurnialim          |                                                                                                ... |
-| 19622070 |   Abdullah Erwan Poltak Halomoan   |                                                                                                ... |
-| 19622071 |       Edbert Eddyson Gunawan       |                                                                                                ... |
-| 19622091 |        Dinda Thalia Fahira         |                                                                                                ... |
-| 19622093 |          Micky Valentino           |                                                                                                ... |
-| 19622194 |         Theo Livius Natael         |                                                                                                ... |
+| 19622034 |          Abdullah Mubarak          | Tab start, Desain dan Coding                                                                                              |
+| 19622066 |          Vanson Kurnialim          | Membuat ReadMe How to Use                                                                                                |
+| 19622070 |   Erwan Poltak Halomoan   | Membuat About Page                                                                                               |
+| 19622071 |       Edbert Eddyson Gunawan       | Template Aplikasi, Page Navigation, Camera Detect Pixel Value, Debug Program, Solve Problem, Kodingan, Ketua Kelompok Milestone                                                                                                |
+| 19622091 |        Dinda Thalia Fahira         | Membuat About Page                                                                                                |
+| 19622093 |          Micky Valentino           | Tab Start, Desain dan Coding                                                                                              |
+| 19622194 |         Theo Livius Natael         | Codingan membuat Layout Camera Page dan Desain                                                                                              |
 | 19622223 |        Louis Ferdyo Gunawan        |                                                                                                ... |
-| 19622224 |            Kayla Dyara             |                                                                                                ... |
-| 19622230 |   Muhammad Rasheed Qais Tandjung   |                                                                                                ... |
-| 19622293 |           Albert Ghazaly           |                                                                                                ... |
+| 19622224 |            Kayla Dyara             | Membuat ReadMe deskripsi  masalah dan lembar kontribusi                                                                                               |
+| 19622230 |   Muhammad Rasheed Qais Tandjung   |   Menulis kode camera page dan style tombol aplikasi                                                                                           |
+| 19622293 |           Albert Ghazaly           |                                                                                      ...           |
 | 19622311 |           Jimly Nur Arif           |                                                                                                ... |
 
 ## Reference
 
-https://pysource.com/2021/10/19/simple-color-recognition-with-opencv-and-python/
+https:   //pysource.com/2021/10/19/simple-color-recognition-with-opencv-and-python/
 https://www.geeksforgeeks.org/multiple-color-detection-in-real-time-using-python-opencv/
 https://www.geeksforgeeks.org/real-time-object-color-detection-using-opencv/
 https://medium.com/analytics-vidhya/how-to-build-your-first-desktop-application-in-python-7568c7d74311
