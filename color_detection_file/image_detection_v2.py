@@ -82,7 +82,7 @@ while(1):
 	color_mask_list = [black_mask,white_mask,red_mask,Red_mask,green_mask,blue_mask,yellow_mask,
 		    purple_mask,orange_mask,gray_mask]
 	for order in range(0,10):
-		# Creating contour to track red color
+		# Creating contour to track each color
 		contours, hierarchy = cv2.findContours(color_mask_list[order],
 											cv2.RETR_TREE,
 											cv2.CHAIN_APPROX_SIMPLE)
@@ -92,12 +92,12 @@ while(1):
 			if(area > 300):
 				x, y, w, h = cv2.boundingRect(contour)
 				imageFrame = cv2.rectangle(imageFrame, (x, y),
-										(x + w, y + h),
-										tuple(median(color_dict_HSV[color_list[order]][1],color_dict_HSV[color_list[order]][0])), 2)
+			       						(x + w, y + h),
+				  						 tuple(color_dict_BGR[color_list[order]]), 2)
 				
 				cv2.putText(imageFrame, color_list[order], (x, y),
 							cv2.FONT_HERSHEY_SIMPLEX, 1.0,
-							tuple(median(color_dict_HSV[color_list[order]][1],color_dict_HSV[color_list[order]][0])))		
+							tuple(color_dict_BGR[color_list[order]]))		
 	# Program Termination
 	cv2.imshow("Multiple Color Detection in Real-TIme", imageFrame)
 	if cv2.waitKey(10) & 0xFF == ord('q'):
