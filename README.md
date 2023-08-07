@@ -17,7 +17,10 @@ Sedangkan, Menurut Zenny (2012), buta warna adalah suatu kelainan yang disebabka
 
 Berdasarkan tingkatannya buta warna dikelompokkan menjadi tiga jenis. Yang pertama, Anomali Trikomat (Anomalous trichromacy), yang pengelompokannya dibagi menjadi, Protanomaly (lemah merah), Deuteranomaly (lemah hijau), dan Tritanomaly (lemah biru). Yang kedua, Dichromat (Dichromacy), Gangguan buta warna dikromat dibagi menjadi tiga jenis, yaitu Protanopia (buta warna merah), Deuteranopia (buta warna hijau), dan Tritanopia (buta warna biru). Dan yang terakhir, Monochromat (Monochromacy) yang pengelompokannya terbagi menjadi, Rod monochromacy (typical) dan Cone monochromacy (atypical).<br>
 
-![Alt text](/relative/path/to/DekomposisiMasalah.png?raw=true "Dekomposisi Masalah")
+---
+
+> Dekomposisi Masalah<br>
+> ![Dekomposisi Masalah](img/Dekomposisi.png "Dekomposisi Masalah")
 
 ## Deskripsi Solusi
 
