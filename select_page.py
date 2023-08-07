@@ -15,31 +15,23 @@ class Select(tk.Frame):
         self.canvas.create_rectangle(30, 90, 690, 470, outline = "light grey", fill="light grey")
         
         # Create header buttons
-        homeButton = self.canvas.create_text(205, 43, text="Return to Home", font = 'Aerial 18', fill = 'black', tags = 'return-home')
-        startAppButton = self.canvas.create_text(500, 43, text="Start App", font = 'Aerial 18', fill = 'black', tags = 'start-app')
-        
+        homeButton = self.canvas.create_text(350, 43, text="Return to Home", font = 'Aerial 18', fill = 'black', tags = 'return-home')
         # Add underline to header buttons
         bboxHome = self.canvas.bbox(homeButton)
-        bboxStart = self.canvas.bbox(startAppButton)
-        
+
         self.canvas.create_rectangle(bboxHome[0], bboxHome[3], bboxHome[2], bboxHome[3] + 2, outline='red', fill = 'red')
-        self.canvas.create_rectangle(bboxStart[0], bboxStart[3], bboxStart[2], bboxStart[3] + 2, outline='blue', fill = 'blue')
-        
         # Add header button fuctionality
         rectHome = self.canvas.tag_bind('return-home', '<Button-1>', self.homeButton)
-        rectStart = self.canvas.tag_bind('start-app', '<Button-1>', self.startApp)
         self.main()
         
     def homeButton(self, event):
         self.show_page_callback('page1')
         
-    def startApp(self, event):
-        self.show_page_callback('page3')
         
     def main(self):
        # Main Text
-        self.canvas.create_text(360,220, text = "MODE 1", fill="black", font=('Helvetica 15 bold'), tags='start-app')
-        self.canvas.create_text(360,270, text = "MODE 2", fill="black", font=('Helvetica 15'), tags='start-app2')
+        self.canvas.create_text(360,220, text = "MODE 1", fill="blue", font=('Helvetica 15 bold'), tags='start-app')
+        self.canvas.create_text(360,270, text = "MODE 2", fill="green", font=('Helvetica 15 bold'), tags='start-app2')
         #tag bind
         self.canvas.tag_bind('start-app', '<Button-1>', self.start_app)
         self.canvas.tag_bind('start-app2', '<Button-1>', self.start_app2)
