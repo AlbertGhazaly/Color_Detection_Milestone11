@@ -35,17 +35,42 @@ class App(tk.Frame):
         yMode = 16
         self.onSingleMode = True
         tk.Label(self, text='Mode:', font='Aerial 14 bold').place(x=528, y= yMode + 7)
-        singleColor = tk.Label(self,text="Single Color")
+        singleColor = tk.Label(self,text="Single-color", bg='yellow')
         singleColor.place(x=600, y= yMode)
         
-        detection = tk.Label(self,text="Detection")
-        detection.place(x=600, y= yMode + 27)
+        multiColor = tk.Label(self,text="Multi-color", bg='white')
+        multiColor.place(x=600, y= yMode + 27)
         
-        def toggleMode(event):
-            self.onSingleMode = not self.onSingleMode
+        # Toggle between single-color and multi-color detection
+        def toggleMode(event, num):
+            if num == '1':
+                self.onSingleMode = True
+                singleColor.configure(bg='yellow')
+                multiColor.configure(bg='white')
+            else:
+                self.onSingleMode = False
+                singleColor.configure(bg='white')
+                multiColor.configure(bg='yellow')
+                
+        singleColor.bind('<Button-1>', lambda event: toggleMode(event, '1'))
+        multiColor.bind('<Button-1>', lambda event: toggleMode(event, '2'))
         
-        singleColor.bind('<Button-1>', toggleMode)
-        detection.bind('<Button-1>', toggleMode)
+        # Mode buttons hover logic
+        def modeButtonEnter(event, button):
+            if button == 'single':
+                singleColor.configure(borderwidth=1, relief='solid')
+            else:
+                multiColor.configure(borderwidth=1, relief='solid')
+        
+        def modeButtonLeave(event):
+            singleColor.configure(borderwidth=0, relief='solid')
+            multiColor.configure(borderwidth=0, relief='solid')
+            
+        singleColor.bind('<Enter>', lambda event: modeButtonEnter(event, 'single'))
+        multiColor.bind('<Enter>', lambda event: modeButtonEnter(event, 'multi'))
+        
+        singleColor.bind('<Leave>', modeButtonLeave)
+        multiColor.bind('<Leave>', modeButtonLeave)
         
         # Camera Section
         self.cameraTop = 110
@@ -127,7 +152,7 @@ class App(tk.Frame):
                 height, width, _ = frame.shape
                 # change BGR to HSV color format
                 hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-                frame = cv2.flip(frame, 1) # flip frames
+                # frame = cv2.flip(frame, 1) # flip frames
                 
                 # get center coordinate (x, y) of window
                 cx = int(width / 2)
@@ -189,7 +214,7 @@ class App(tk.Frame):
             # HSV(hue-saturation-value)
             # color space
             hsvFrame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-            frame = cv2.flip(frame, 1) # flip frames
+            # frame = cv2.flip(frame, 1) # flip frames
 
             # define mask for each color using range of color
             # mask = cv2.inRange(frame, lower range, upper range)
