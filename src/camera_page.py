@@ -293,7 +293,7 @@ class App(tk.Frame):
 
                 for pic, contour in enumerate(contours):
                     area = cv2.contourArea(contour)
-                    if(area > 1500): #Size of color detected
+                    if(area > 7000): #Size of color detected
                         x, y, w, h = cv2.boundingRect(contour) #the rectangle
                         frame = cv2.rectangle(frame, (x, y),
                                                 (x + w, y + h),
